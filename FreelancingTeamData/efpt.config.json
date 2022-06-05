@@ -1,0 +1,163 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "FreeLanceProjectContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": "Data",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "FreelancingTeamData",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Admin]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Category]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CategoryOfSkill]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Certificate]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Client]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClientCredit]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClientLanguage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClientSendTransactionToTeam]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Complain]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Education]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Experience]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Freelancer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FreelancerAccountBank]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FreelancerCredit]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FreelancerHasSkill]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FreelancerJoinTeam]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FreelancerLanguage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FreelancerTeamTransaction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Portoflio]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PortoflioHasSkill]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Project]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProjectHasReview]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProjectNeedSkill]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Review]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Skill]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Social]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Team]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TeamBidsProject]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TeamLanguage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Transaction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserAccount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Wallet]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "DESKTOP-GU2I92M.FreeLanceProject",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
