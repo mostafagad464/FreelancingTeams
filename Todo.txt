@@ -1,8 +1,0 @@
-
-
-1- Add message entity.
-	Communication Interface.
-
-2- Handle review in database.
-
-3- Client Id in Project or ClientProject Entity

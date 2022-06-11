@@ -10,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Reopsitories
 {
-    public class RepositoryAccount : ICRUD<Account>, IAccount<Account>
+    public class AccountRepository : ICRUD<Account>, IAccount<Account>
     {
 
         private readonly FreeLanceProjectContext db;
 
-        public RepositoryAccount(FreeLanceProjectContext _db)
+        public AccountRepository(FreeLanceProjectContext _db)
         {
             db = _db;
         }
@@ -81,7 +81,7 @@ namespace FreelancingTeamData.Reopsitories
                 var obj = await db.Accounts.Where(e => e.Email == email && e.Password == password).FirstOrDefaultAsync();
                 return obj;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return null;
             }

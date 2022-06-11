@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Reopsitories
 {
-    public class RepositoryClient : IClient<Client>
+    public class RepositoryClient : IClient<Client>, ICRUD<Client>
     {
 
         private readonly FreeLanceProjectContext db;
@@ -25,7 +25,27 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
+        public Task<Client> Create(Client _object)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Client> Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Client> EditProjectStatus(Client Oject)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Client>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Client> GetById(int id)
         {
             throw new NotImplementedException();
         }
@@ -46,6 +66,11 @@ namespace FreelancingTeamData.Reopsitories
         }
 
         public Task<IEnumerable<Client>> SearchForTeamBySkills(IEnumerable<Client> _objects)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Client> Update(int id, Client _object)
         {
             throw new NotImplementedException();
         }

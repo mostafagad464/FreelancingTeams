@@ -14,14 +14,7 @@ namespace FreelancingTeamData.Interfaces
         // Admin can Check project completion and the client
         // No implementation in user or make interface for it
         //public Task<T> CheckProjectCompletion(T _object);
-        
-
-
-
         public Task<T> ShowNotifications(int AccountId, T _object);
-
-
-
 
     }
 }

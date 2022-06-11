@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FreelancingTeamData.Interfaces
+namespace FreelancingTeamData.Reopsitories
 {
-    public interface IUser<T>
+    public class ClientRepository
     {
-        public  Task<T> CompleteProfile(T _object);
     }
 }

@@ -122,7 +122,7 @@ namespace FreelancingTeamsAPI.Controllers
 
         // POST: api/UserAccounts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("registration")]
         public async Task<ActionResult<Account>> PostUserAccount(Account Account)
         {
             if (Account != null)
@@ -144,7 +144,7 @@ namespace FreelancingTeamsAPI.Controllers
 
         // DELETE: api/UserAccounts/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserAccount(int id)
+        public async Task<ActionResult> DeleteUserAccount(int id)
         {
             if (id != 0)
             {
@@ -171,6 +171,20 @@ namespace FreelancingTeamsAPI.Controllers
         //{
         //    return (_context.UserAccounts?.Any(e => e.Id == id)).GetValueOrDefault();
         //}
+        [HttpPost("login")]
+        public async Task<ActionResult<Account>> Login(string email, string password)
+        {
+            if (email != null && password != null)
+            {
+                var obj = await  account.Login(email, password);
+                if (obj != null)
+                    return Ok(obj);
+                return NotFound();
+            }            
+            return BadRequest();
+        }
+
+        
         
     }
 }
