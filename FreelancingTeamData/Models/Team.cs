@@ -5,13 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using IndexAttribute = System.ComponentModel.DataAnnotations.Schema.IndexAttribute;
 
 namespace FreelancingTeamData.Models
 {
     [Table("Team")]
-    // There is error
-    //[Index("WebSite", Name = "UQ__Team__AEE1DE456CB1558D", IsUnique = true)]
+    [Index("WebSite", Name = "UQ__Team__AEE1DE456CB1558D", IsUnique = true)]
     public partial class Team
     {
         public Team()

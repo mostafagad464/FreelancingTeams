@@ -20,6 +20,7 @@ namespace FreelancingTeamData.Data
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<AccountMessage> AccountMessages { get; set; }
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
@@ -59,6 +60,19 @@ namespace FreelancingTeamData.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AccountMessage>(entity =>
+            {
+                entity.HasOne(d => d.Reciever)
+                    .WithMany(p => p.AccountMessageRecievers)
+                    .HasForeignKey(d => d.RecieverId)
+                    .HasConstraintName("FK__AccountMe__Recie__725BF7F6");
+
+                entity.HasOne(d => d.Sender)
+                    .WithMany(p => p.AccountMessageSenders)
+                    .HasForeignKey(d => d.SenderId)
+                    .HasConstraintName("FK__AccountMe__Sende__7167D3BD");
+            });
+
             modelBuilder.Entity<Admin>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();

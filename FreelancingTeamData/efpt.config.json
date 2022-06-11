@@ -18,6 +18,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[AccountMessages]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[AccountNotification]",
          "ObjectType": 0
       },

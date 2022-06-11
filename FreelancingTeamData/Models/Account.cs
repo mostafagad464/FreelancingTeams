@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
 namespace FreelancingTeamData.Models
 {
@@ -17,6 +16,8 @@ namespace FreelancingTeamData.Models
     {
         public Account()
         {
+            AccountMessageRecievers = new HashSet<AccountMessage>();
+            AccountMessageSenders = new HashSet<AccountMessage>();
             Notifications = new HashSet<Notification>();
         }
 
@@ -45,6 +46,10 @@ namespace FreelancingTeamData.Models
         public virtual Admin Admin { get; set; }
         [InverseProperty("IdNavigation")]
         public virtual User User { get; set; }
+        [InverseProperty("Reciever")]
+        public virtual ICollection<AccountMessage> AccountMessageRecievers { get; set; }
+        [InverseProperty("Sender")]
+        public virtual ICollection<AccountMessage> AccountMessageSenders { get; set; }
 
         [ForeignKey("AccountId")]
         [InverseProperty("Accounts")]
