@@ -18,12 +18,13 @@ namespace FreelancingTeamData.Models
 
         [Key]
         public int Id { get; set; }
+        [Required]
         [StringLength(50)]
         public string Title { get; set; }
+        public string Description { get; set; }
         [StringLength(50)]
         public string Link { get; set; }
-        public string Description { get; set; }
-        public int? FreelancerId { get; set; }
+        public int FreelancerId { get; set; }
 
         [ForeignKey("FreelancerId")]
         [InverseProperty("Portoflios")]

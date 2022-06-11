@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IUser<T>
+    internal interface IComplain <T>
     {
-        public void CompleteProfile(int UserId, Task _object);
+        public Task<T> Complain(T _object);
     }
 }

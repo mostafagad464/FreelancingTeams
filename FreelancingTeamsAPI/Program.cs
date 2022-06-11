@@ -20,8 +20,8 @@ builder.Services.AddDbContext<FreeLanceProjectContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Dependancy Injection
-builder.Services.AddScoped<ICRUD<UserAccount>, RepositoryUserAccount>();
-builder.Services.AddScoped<IPerson<UserAccount>, RepositoryUserAccount>();
+builder.Services.AddScoped<ICRUD<Account>, RepositoryAccount>();
+builder.Services.AddScoped<IAccount<Account>, RepositoryAccount>();
 
 
 builder.Services.AddControllers();

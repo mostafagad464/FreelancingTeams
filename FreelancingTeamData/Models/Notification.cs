@@ -8,25 +8,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("Wallet")]
-    public partial class Wallet
+    [Table("Notification")]
+    public partial class Notification
     {
-        public Wallet()
+        public Notification()
         {
+            Accounts = new HashSet<Account>();
             Teams = new HashSet<Team>();
-            Users = new HashSet<User>();
         }
 
         [Key]
         public int Id { get; set; }
-        [Column(TypeName = "money")]
-        public decimal? Money { get; set; }
-        [Column(TypeName = "money")]
-        public decimal? Available { get; set; }
+        [Unicode(false)]
+        public string Description { get; set; }
 
-        [InverseProperty("Wallet")]
+        [ForeignKey("NotificationId")]
+        [InverseProperty("Notifications")]
+        public virtual ICollection<Account> Accounts { get; set; }
+        [ForeignKey("NotificationId")]
+        [InverseProperty("Notifications")]
         public virtual ICollection<Team> Teams { get; set; }
-        [InverseProperty("Wallet")]
-        public virtual ICollection<User> Users { get; set; }
     }
 }

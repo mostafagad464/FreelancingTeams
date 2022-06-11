@@ -5,34 +5,38 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using IndexAttribute = System.ComponentModel.DataAnnotations.Schema.IndexAttribute;
 
 namespace FreelancingTeamData.Models
 {
     [Table("Team")]
+    // There is error
+    //[Index("WebSite", Name = "UQ__Team__AEE1DE456CB1558D", IsUnique = true)]
     public partial class Team
     {
         public Team()
         {
-            ClientSendTransactionToTeams = new HashSet<ClientSendTransactionToTeam>();
             Complains = new HashSet<Complain>();
-            FreelancerJoinTeams = new HashSet<FreelancerJoinTeam>();
-            FreelancerTeamTransactions = new HashSet<FreelancerTeamTransaction>();
-            Projects = new HashSet<Project>();
-            TeamBidsProjects = new HashSet<TeamBidsProject>();
-            TeamLanguages = new HashSet<TeamLanguage>();
+            Deals = new HashSet<Deal>();
+            Proposals = new HashSet<Proposal>();
+            Reviews = new HashSet<Review>();
+            TeamFreelancerMessages = new HashSet<TeamFreelancerMessage>();
+            TeamMembers = new HashSet<TeamMember>();
+            TeamTransactions = new HashSet<TeamTransaction>();
+            Notifications = new HashSet<Notification>();
         }
 
         [Key]
         public int Id { get; set; }
         [Column(TypeName = "image")]
         public byte[] Logo { get; set; }
-        [StringLength(50)]
-        public string WebSite { get; set; }
-        public bool? IsVerfied { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime? CreationDate { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime CreationDate { get; set; }
         public string Description { get; set; }
         public double? Rate { get; set; }
+        public bool? IsVerfied { get; set; }
+        [StringLength(100)]
+        public string WebSite { get; set; }
         public int? LeaderId { get; set; }
         public int? WalletId { get; set; }
 
@@ -42,19 +46,23 @@ namespace FreelancingTeamData.Models
         [ForeignKey("WalletId")]
         [InverseProperty("Teams")]
         public virtual Wallet Wallet { get; set; }
-        [InverseProperty("Team")]
-        public virtual ICollection<ClientSendTransactionToTeam> ClientSendTransactionToTeams { get; set; }
-        [InverseProperty("Team")]
+        [InverseProperty("ComplainingTeam")]
         public virtual ICollection<Complain> Complains { get; set; }
         [InverseProperty("Team")]
-        public virtual ICollection<FreelancerJoinTeam> FreelancerJoinTeams { get; set; }
+        public virtual ICollection<Deal> Deals { get; set; }
         [InverseProperty("Team")]
-        public virtual ICollection<FreelancerTeamTransaction> FreelancerTeamTransactions { get; set; }
+        public virtual ICollection<Proposal> Proposals { get; set; }
         [InverseProperty("Team")]
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
         [InverseProperty("Team")]
-        public virtual ICollection<TeamBidsProject> TeamBidsProjects { get; set; }
+        public virtual ICollection<TeamFreelancerMessage> TeamFreelancerMessages { get; set; }
         [InverseProperty("Team")]
-        public virtual ICollection<TeamLanguage> TeamLanguages { get; set; }
+        public virtual ICollection<TeamMember> TeamMembers { get; set; }
+        [InverseProperty("Team")]
+        public virtual ICollection<TeamTransaction> TeamTransactions { get; set; }
+
+        [ForeignKey("TeamId")]
+        [InverseProperty("Teams")]
+        public virtual ICollection<Notification> Notifications { get; set; }
     }
 }

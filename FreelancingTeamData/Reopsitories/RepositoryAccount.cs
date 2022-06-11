@@ -10,21 +10,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Reopsitories
 {
-    public class RepositoryUserAccount : ICRUD<UserAccount>, IPerson<UserAccount>
+    public class RepositoryAccount : ICRUD<Account>, IAccount<Account>
     {
 
         private readonly FreeLanceProjectContext db;
 
-        public RepositoryUserAccount(FreeLanceProjectContext _db)
+        public RepositoryAccount(FreeLanceProjectContext _db)
         {
             db = _db;
         }
 
-        public async Task<UserAccount> Create(UserAccount _object)
+        public async Task<Account> Create(Account _object)
         {
             try
             {
-                var obj = await db.UserAccounts.AddAsync(_object);
+                var obj = await db.Accounts.AddAsync(_object);
                 await db.SaveChangesAsync();
                 return obj.Entity;
             }
@@ -34,11 +34,11 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public async Task<UserAccount> Delete(int id)
+        public async Task<Account> Delete(int id)
         {
             try
             {
-                var obj = await db.UserAccounts.FindAsync(id);
+                var obj = await db.Accounts.FindAsync(id);
                 db.Remove(obj);
                 await db.SaveChangesAsync();
                 return obj;
@@ -49,11 +49,11 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public async Task<IEnumerable<UserAccount>> GetAll()
+        public async Task<IEnumerable<Account>> GetAll()
         {
             try
             {
-                return await db.UserAccounts.ToListAsync();
+                return await db.Accounts.ToListAsync();
             }
             catch (Exception)
             {
@@ -61,11 +61,11 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public async Task<UserAccount> GetById(int id)
+        public async Task<Account> GetById(int id)
         {
             try
             {
-                return await db.UserAccounts.FindAsync(id);
+                return await db.Accounts.FindAsync(id);
             }
             catch (Exception)
             {
@@ -73,33 +73,14 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public async Task<UserAccount> Login(string mail, string password)
+        public async Task<Account> Update(int id, Account _object)
         {
             try
             {
-                var obj = await db.UserAccounts.Where(u=> u.Email == mail && u.Password == password).FirstOrDefaultAsync();
-                return obj;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        //public bool Register(UserAccount _object)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public async Task<UserAccount> Update(int id, UserAccount _object)
-        {
-            try
-            {
-                var obj = await db.UserAccounts.FindAsync(id);
-                obj.FName = _object.FName;
-                obj.LName = _object.LName;
+                var obj = await db.Accounts.FindAsync(id);
+                obj.FirstName = _object.FirstName;
+                obj.LastName = _object.LastName;
                 obj.Email = _object.Email;
-                obj.Country = _object.Country;
                 obj.Password = _object.Password;
                 return obj;
             }
@@ -107,6 +88,25 @@ namespace FreelancingTeamData.Reopsitories
             {
                 return null;
             }
+        }
+
+
+        public async Task<Account> Login(string mail, string password)
+        {
+            try
+            {
+                var obj = await db.Accounts.Where(u => u.Email == mail && u.Password == password).FirstOrDefaultAsync();
+                return obj;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        Task<Account> IAccount<Account>.ShowNotification(int AccountId, Account _object)
+        {
+            throw new NotImplementedException();
         }
     }
 }

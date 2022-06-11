@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IPerson<T>
+    public interface IAccount<T>
     {
         public Task<T> Login(string mail, string password);
         //public Boolean Register(T _object);
@@ -15,8 +15,11 @@ namespace FreelancingTeamData.Interfaces
         // No implementation in user or make interface for it
         //public Task<T> CheckProjectCompletion(T _object);
         
-        // User
-        public Task<T> SendMessage(int id, T _object);
+
+
+
+        public Task<T> ShowNotifications(int AccountId, T _object);
+
 
 
 

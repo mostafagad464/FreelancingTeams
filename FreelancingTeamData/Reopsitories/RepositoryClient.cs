@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace FreelancingTeamData.Reopsitories
 {
     public class RepositoryClient : IClient<Client>
@@ -20,6 +21,16 @@ namespace FreelancingTeamData.Reopsitories
         }
 
         public Task<Client> ChooseTeam(int TeamId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Client> EditProjectStatus(Client Oject)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Client> PayPayment(string _object)
         {
             throw new NotImplementedException();
         }

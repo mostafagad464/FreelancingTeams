@@ -8,25 +8,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("ClientSendTransactionToTeam")]
-    public partial class ClientSendTransactionToTeam
+    [Table("Deal")]
+    public partial class Deal
     {
         [Key]
         public int ClientId { get; set; }
         [Key]
         public int TeamId { get; set; }
         [Key]
-        public int TransactionId { get; set; }
+        public int ProjectId { get; set; }
+        [Column(TypeName = "money")]
+        public decimal? Money { get; set; }
+        public int? Duration { get; set; }
         public bool? Done { get; set; }
 
         [ForeignKey("ClientId")]
-        [InverseProperty("ClientSendTransactionToTeams")]
+        [InverseProperty("Deals")]
         public virtual Client Client { get; set; }
+        [ForeignKey("ProjectId")]
+        [InverseProperty("Deals")]
+        public virtual Project Project { get; set; }
         [ForeignKey("TeamId")]
-        [InverseProperty("ClientSendTransactionToTeams")]
+        [InverseProperty("Deals")]
         public virtual Team Team { get; set; }
-        [ForeignKey("TransactionId")]
-        [InverseProperty("ClientSendTransactionToTeams")]
-        public virtual Transaction Transaction { get; set; }
     }
 }

@@ -14,6 +14,14 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[dbo].[Account]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AccountNotification]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Admin]",
          "ObjectType": 0
       },
@@ -22,27 +30,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[CategoryOfSkill]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Certificate]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[Client]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[ClientCredit]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[ClientLanguage]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[ClientSendTransactionToTeam]",
          "ObjectType": 0
       },
       {
@@ -50,11 +38,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Education]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Experience]",
+         "Name": "[dbo].[Deal]",
          "ObjectType": 0
       },
       {
@@ -62,27 +46,23 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[FreelancerAccountBank]",
+         "Name": "[dbo].[FreelancerCertificate]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[FreelancerCredit]",
+         "Name": "[dbo].[FreelancerEducation]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[FreelancerHasSkill]",
+         "Name": "[dbo].[FreelancerExperience]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[FreelancerJoinTeam]",
+         "Name": "[dbo].[FreelancerSkill]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[FreelancerLanguage]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[FreelancerTeamTransaction]",
+         "Name": "[dbo].[Notification]",
          "ObjectType": 0
       },
       {
@@ -90,7 +70,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[PortoflioHasSkill]",
+         "Name": "[dbo].[PortoflioSkill]",
          "ObjectType": 0
       },
       {
@@ -98,11 +78,15 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ProjectHasReview]",
+         "Name": "[dbo].[ProjectPayment]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ProjectNeedSkill]",
+         "Name": "[dbo].[ProjectSkill]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Proposal]",
          "ObjectType": 0
       },
       {
@@ -114,7 +98,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Social]",
+         "Name": "[dbo].[SkillCategory]",
          "ObjectType": 0
       },
       {
@@ -122,11 +106,19 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[TeamBidsProject]",
+         "Name": "[dbo].[TeamFreelancerMessages]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[TeamLanguage]",
+         "Name": "[dbo].[TeamMembers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TeamNotification]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TeamTransaction]",
          "ObjectType": 0
       },
       {
@@ -134,7 +126,19 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[UserAccount]",
+         "Name": "[dbo].[User]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserCredit]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserLanguage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserSocial]",
          "ObjectType": 0
       },
       {
@@ -142,7 +146,7 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "DESKTOP-GU2I92M.FreeLanceProject",
+   "UiHint": "projectdatabase.FreelancingTeams",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

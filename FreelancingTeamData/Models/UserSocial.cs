@@ -8,17 +8,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("FreelancerLanguage")]
-    public partial class FreelancerLanguage
+    [Table("UserSocial")]
+    public partial class UserSocial
     {
         [Key]
-        public int FreelancerId { get; set; }
+        public int UserId { get; set; }
         [Key]
         [StringLength(50)]
-        public string Language { get; set; }
+        [Unicode(false)]
+        public string Type { get; set; }
+        [Required]
+        [Unicode(false)]
+        public string Link { get; set; }
 
-        [ForeignKey("FreelancerId")]
-        [InverseProperty("FreelancerLanguages")]
-        public virtual Freelancer Freelancer { get; set; }
+        [ForeignKey("UserId")]
+        [InverseProperty("UserSocials")]
+        public virtual User User { get; set; }
     }
 }

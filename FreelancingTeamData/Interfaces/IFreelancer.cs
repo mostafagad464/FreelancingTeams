@@ -14,5 +14,7 @@ namespace FreelancingTeamData.Interfaces
         //public Task<IEnumerable<T>> SearchForProject(T _object);
         //public Task<T> OfferProposal(T _object);
 
+        // Join Team , 
+
     }
 }

@@ -13,45 +13,28 @@ namespace FreelancingTeamData.Models
     {
         public Client()
         {
-            ClientCredits = new HashSet<ClientCredit>();
-            ClientLanguages = new HashSet<ClientLanguage>();
-            ClientSendTransactionToTeams = new HashSet<ClientSendTransactionToTeam>();
-            Complains = new HashSet<Complain>();
+            Deals = new HashSet<Deal>();
+            ProjectPayments = new HashSet<ProjectPayment>();
+            Projects = new HashSet<Project>();
+            Reviews = new HashSet<Review>();
+            TeamFreelancerMessages = new HashSet<TeamFreelancerMessage>();
         }
 
         [Key]
         public int Id { get; set; }
-        public double? Rate { get; set; }
-        [Column(TypeName = "image")]
-        public byte[] Image { get; set; }
-        public int? ReplySpeed { get; set; }
-        [Column(TypeName = "numeric(18, 0)")]
-        public decimal? Phone { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime? Birthday { get; set; }
-        public string Bio { get; set; }
-        public bool? ActiveStatus { get; set; }
-        public int? UserId { get; set; }
-        public int? WalletId { get; set; }
-        public int? AdminId { get; set; }
-        public int? IdentityVerfication { get; set; }
 
-        [ForeignKey("AdminId")]
-        [InverseProperty("Clients")]
-        public virtual Admin Admin { get; set; }
-        [ForeignKey("UserId")]
-        [InverseProperty("Clients")]
-        public virtual UserAccount User { get; set; }
-        [ForeignKey("WalletId")]
-        [InverseProperty("Clients")]
-        public virtual Wallet Wallet { get; set; }
+        [ForeignKey("Id")]
+        [InverseProperty("ClientNavigation")]
+        public virtual User IdNavigation { get; set; }
         [InverseProperty("Client")]
-        public virtual ICollection<ClientCredit> ClientCredits { get; set; }
+        public virtual ICollection<Deal> Deals { get; set; }
         [InverseProperty("Client")]
-        public virtual ICollection<ClientLanguage> ClientLanguages { get; set; }
+        public virtual ICollection<ProjectPayment> ProjectPayments { get; set; }
         [InverseProperty("Client")]
-        public virtual ICollection<ClientSendTransactionToTeam> ClientSendTransactionToTeams { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
         [InverseProperty("Client")]
-        public virtual ICollection<Complain> Complains { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        [InverseProperty("Client")]
+        public virtual ICollection<TeamFreelancerMessage> TeamFreelancerMessages { get; set; }
     }
 }

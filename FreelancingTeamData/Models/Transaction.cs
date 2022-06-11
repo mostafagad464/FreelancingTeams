@@ -13,22 +13,19 @@ namespace FreelancingTeamData.Models
     {
         public Transaction()
         {
-            ClientSendTransactionToTeams = new HashSet<ClientSendTransactionToTeam>();
-            FreelancerTeamTransactions = new HashSet<FreelancerTeamTransaction>();
+            ProjectPayments = new HashSet<ProjectPayment>();
         }
 
         [Key]
         public int Id { get; set; }
         [Column(TypeName = "money")]
-        public decimal? Money { get; set; }
+        public decimal Money { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
         [StringLength(50)]
         public string Method { get; set; }
 
         [InverseProperty("Transaction")]
-        public virtual ICollection<ClientSendTransactionToTeam> ClientSendTransactionToTeams { get; set; }
-        [InverseProperty("Transaction")]
-        public virtual ICollection<FreelancerTeamTransaction> FreelancerTeamTransactions { get; set; }
+        public virtual ICollection<ProjectPayment> ProjectPayments { get; set; }
     }
 }

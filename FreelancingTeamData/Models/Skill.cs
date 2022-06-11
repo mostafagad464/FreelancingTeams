@@ -13,7 +13,7 @@ namespace FreelancingTeamData.Models
     {
         public Skill()
         {
-            FreelancerHasSkills = new HashSet<FreelancerHasSkill>();
+            FreelancerSkills = new HashSet<FreelancerSkill>();
             Categories = new HashSet<Category>();
             Portoflios = new HashSet<Portoflio>();
             Projects = new HashSet<Project>();
@@ -21,11 +21,12 @@ namespace FreelancingTeamData.Models
 
         [Key]
         public int Id { get; set; }
+        [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
         [InverseProperty("Skill")]
-        public virtual ICollection<FreelancerHasSkill> FreelancerHasSkills { get; set; }
+        public virtual ICollection<FreelancerSkill> FreelancerSkills { get; set; }
 
         [ForeignKey("SkillId")]
         [InverseProperty("Skills")]

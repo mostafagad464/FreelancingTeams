@@ -8,32 +8,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("Review")]
-    public partial class Review
+    public partial class TeamFreelancerMessage
     {
         [Key]
-        public int ClientId { get; set; }
-        [Key]
-        public int TeamId { get; set; }
-        [Key]
-        public int ProjectId { get; set; }
-        public double? Rate { get; set; }
+        public int Id { get; set; }
+        public int? ClientId { get; set; }
+        public int? TeamId { get; set; }
         [Unicode(false)]
-        public string Content { get; set; }
+        public string Message { get; set; }
         [Column(TypeName = "date")]
         public DateTime? Date { get; set; }
         [StringLength(5)]
         [Unicode(false)]
-        public string FromClient { get; set; }
+        public string Sender { get; set; }
+        public bool? Read { get; set; }
+        public bool? Deleted { get; set; }
 
         [ForeignKey("ClientId")]
-        [InverseProperty("Reviews")]
+        [InverseProperty("TeamFreelancerMessages")]
         public virtual Client Client { get; set; }
-        [ForeignKey("ProjectId")]
-        [InverseProperty("Reviews")]
-        public virtual Project Project { get; set; }
         [ForeignKey("TeamId")]
-        [InverseProperty("Reviews")]
+        [InverseProperty("TeamFreelancerMessages")]
         public virtual Team Team { get; set; }
     }
 }

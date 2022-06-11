@@ -8,26 +8,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("Certificate")]
-    public partial class Certificate
+    [Table("FreelancerEducation")]
+    public partial class FreelancerEducation
     {
         [Key]
         public int FreelancerId { get; set; }
         [Key]
+        public int gradYear { get; set; }
         [StringLength(50)]
-        public string Title { get; set; }
+        [Unicode(false)]
+        public string Grade { get; set; }
         [StringLength(50)]
-        public string Link { get; set; }
+        public string University { get; set; }
         [StringLength(50)]
-        public string Organization { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime? Date { get; set; }
-        public string Description { get; set; }
+        public string Faculty { get; set; }
         [StringLength(50)]
-        public string Specialization { get; set; }
+        public string Department { get; set; }
 
         [ForeignKey("FreelancerId")]
-        [InverseProperty("Certificates")]
+        [InverseProperty("FreelancerEducations")]
         public virtual Freelancer Freelancer { get; set; }
     }
 }

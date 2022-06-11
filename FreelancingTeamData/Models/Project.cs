@@ -13,34 +13,47 @@ namespace FreelancingTeamData.Models
     {
         public Project()
         {
-            ProjectHasReviews = new HashSet<ProjectHasReview>();
-            TeamBidsProjects = new HashSet<TeamBidsProject>();
+            Deals = new HashSet<Deal>();
+            ProjectPayments = new HashSet<ProjectPayment>();
+            Proposals = new HashSet<Proposal>();
+            Reviews = new HashSet<Review>();
+            TeamTransactions = new HashSet<TeamTransaction>();
             Skills = new HashSet<Skill>();
         }
 
         [Key]
         public int Id { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime? PostingDate { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime PostingDate { get; set; }
+        [Required]
         [StringLength(50)]
         public string Title { get; set; }
-        public int? State { get; set; }
-        public double? AVGBid { get; set; }
         public string Description { get; set; }
-        public string Duration { get; set; }
+        public int? Duration { get; set; }
+        [Required]
+        [StringLength(10)]
+        [Unicode(false)]
+        public string State { get; set; }
         [Column(TypeName = "money")]
-        public decimal? BudgetFrom { get; set; }
+        public decimal MinBudget { get; set; }
         [Column(TypeName = "money")]
-        public decimal? BudgetTo { get; set; }
-        public int? TeamId { get; set; }
+        public decimal MaxBudget { get; set; }
+        public double? AVGBid { get; set; }
+        public int ClientId { get; set; }
 
-        [ForeignKey("TeamId")]
+        [ForeignKey("ClientId")]
         [InverseProperty("Projects")]
-        public virtual Team Team { get; set; }
+        public virtual Client Client { get; set; }
         [InverseProperty("Project")]
-        public virtual ICollection<ProjectHasReview> ProjectHasReviews { get; set; }
+        public virtual ICollection<Deal> Deals { get; set; }
         [InverseProperty("Project")]
-        public virtual ICollection<TeamBidsProject> TeamBidsProjects { get; set; }
+        public virtual ICollection<ProjectPayment> ProjectPayments { get; set; }
+        [InverseProperty("Project")]
+        public virtual ICollection<Proposal> Proposals { get; set; }
+        [InverseProperty("Project")]
+        public virtual ICollection<Review> Reviews { get; set; }
+        [InverseProperty("Project")]
+        public virtual ICollection<TeamTransaction> TeamTransactions { get; set; }
 
         [ForeignKey("ProjectId")]
         [InverseProperty("Projects")]

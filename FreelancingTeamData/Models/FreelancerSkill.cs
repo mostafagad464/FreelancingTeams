@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("FreelancerHasSkill")]
-    public partial class FreelancerHasSkill
+    [Table("FreelancerSkill")]
+    public partial class FreelancerSkill
     {
         [Key]
         public int FreelancerId { get; set; }
@@ -18,10 +18,10 @@ namespace FreelancingTeamData.Models
         public double? EfficiancyRate { get; set; }
 
         [ForeignKey("FreelancerId")]
-        [InverseProperty("FreelancerHasSkills")]
+        [InverseProperty("FreelancerSkills")]
         public virtual Freelancer Freelancer { get; set; }
         [ForeignKey("SkillId")]
-        [InverseProperty("FreelancerHasSkills")]
+        [InverseProperty("FreelancerSkills")]
         public virtual Skill Skill { get; set; }
     }
 }

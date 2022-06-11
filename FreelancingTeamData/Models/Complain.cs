@@ -13,25 +13,22 @@ namespace FreelancingTeamData.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        public string Description { get; set; }
         [StringLength(50)]
         public string Type { get; set; }
-        public string Description { get; set; }
-        public int? ClientId { get; set; }
-        public int? FreelancerId { get; set; }
-        public int? TeamId { get; set; }
+        public int? ComplainingUserId { get; set; }
+        public int? ComplainingTeamId { get; set; }
         public int? AdminHandlerId { get; set; }
 
         [ForeignKey("AdminHandlerId")]
         [InverseProperty("Complains")]
         public virtual Admin AdminHandler { get; set; }
-        [ForeignKey("ClientId")]
+        [ForeignKey("ComplainingTeamId")]
         [InverseProperty("Complains")]
-        public virtual Client Client { get; set; }
-        [ForeignKey("FreelancerId")]
+        public virtual Team ComplainingTeam { get; set; }
+        [ForeignKey("ComplainingUserId")]
         [InverseProperty("Complains")]
-        public virtual Freelancer Freelancer { get; set; }
-        [ForeignKey("TeamId")]
-        [InverseProperty("Complains")]
-        public virtual Team Team { get; set; }
+        public virtual User ComplainingUser { get; set; }
     }
 }

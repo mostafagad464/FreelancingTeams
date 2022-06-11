@@ -13,29 +13,19 @@ namespace FreelancingTeamData.Models
     {
         public Admin()
         {
-            Clients = new HashSet<Client>();
             Complains = new HashSet<Complain>();
-            Freelancers = new HashSet<Freelancer>();
+            Users = new HashSet<User>();
         }
 
         [Key]
         public int Id { get; set; }
-        [Required]
-        public string FName { get; set; }
-        [Required]
-        public string LName { get; set; }
-        [Required]
-        public string UserName { get; set; }
-        [Required]
-        public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
 
+        [ForeignKey("Id")]
         [InverseProperty("Admin")]
-        public virtual ICollection<Client> Clients { get; set; }
+        public virtual Account IdNavigation { get; set; }
         [InverseProperty("AdminHandler")]
         public virtual ICollection<Complain> Complains { get; set; }
-        [InverseProperty("Admin")]
-        public virtual ICollection<Freelancer> Freelancers { get; set; }
+        [InverseProperty("AdminValidatedNavigation")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

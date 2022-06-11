@@ -13,22 +13,22 @@ namespace FreelancingTeamsAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserAccountsController : ControllerBase
+    public class AccountsController : ControllerBase
     {
 
         //private readonly FreeLanceProjectContext _context;
-        private readonly ICRUD<UserAccount> crud;
-        private readonly IPerson<UserAccount> person;
+        private readonly ICRUD<Account> crud;
+        private readonly IAccount<Account> account;
 
-        public UserAccountsController(ICRUD<UserAccount> _crud, IPerson<UserAccount> _person)
+        public AccountsController(ICRUD<Account> _crud, IAccount<Account> _account)
         {
             crud = _crud;
-            person = _person;
+            account = _account;
         }
 
         // GET: api/UserAccounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserAccount>>> GetUserAccounts()
+        public async Task<ActionResult<IEnumerable<Account>>> GetUserAccounts()
         {
             //var obj = await crud.GetAll();
             var obj = await crud.GetAll();
@@ -43,7 +43,7 @@ namespace FreelancingTeamsAPI.Controllers
         
         // GET: api/UserAccounts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserAccount>> GetUserAccount(int id)
+        public async Task<ActionResult<Account>> GetUserAccount(int id)
         {
 
             //if (_context.UserAccounts == null)
@@ -72,7 +72,7 @@ namespace FreelancingTeamsAPI.Controllers
         // PUT: api/UserAccounts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserAccount(int id, UserAccount userAccount)
+        public async Task<IActionResult> PutUserAccount(int id, Account userAccount)
         {
 
             if (id != 0 && userAccount != null)
@@ -123,18 +123,18 @@ namespace FreelancingTeamsAPI.Controllers
         // POST: api/UserAccounts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserAccount>> PostUserAccount(UserAccount userAccount)
+        public async Task<ActionResult<Account>> PostUserAccount(Account Account)
         {
-            if (User!=null)
+            if (Account != null)
             {
-                var obj = await crud.Create(userAccount);
+                var obj = await crud.Create(Account);
                 if (obj != null)
                 {
                     string url = HttpContext.Request.Path.Value;
                     return Created(url, obj);
                 }
             }
-            return Problem("Entity set 'FreeLanceProjectContext.UserAccounts'  is null.");
+            return Problem("Entity set 'FreeLanceProjectContext.Account'  is null.");
 
             //_context.UserAccounts.Add(userAccount);
             //await _context.SaveChangesAsync();

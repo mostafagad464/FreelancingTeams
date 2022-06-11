@@ -13,72 +13,40 @@ namespace FreelancingTeamData.Models
     {
         public Freelancer()
         {
-            Certificates = new HashSet<Certificate>();
-            Complains = new HashSet<Complain>();
-            Educations = new HashSet<Education>();
-            Experiences = new HashSet<Experience>();
-            FreelancerAccountBanks = new HashSet<FreelancerAccountBank>();
-            FreelancerCredits = new HashSet<FreelancerCredit>();
-            FreelancerHasSkills = new HashSet<FreelancerHasSkill>();
-            FreelancerJoinTeams = new HashSet<FreelancerJoinTeam>();
-            FreelancerLanguages = new HashSet<FreelancerLanguage>();
-            FreelancerTeamTransactions = new HashSet<FreelancerTeamTransaction>();
+            FreelancerCertificates = new HashSet<FreelancerCertificate>();
+            FreelancerEducations = new HashSet<FreelancerEducation>();
+            FreelancerExperiences = new HashSet<FreelancerExperience>();
+            FreelancerSkills = new HashSet<FreelancerSkill>();
             Portoflios = new HashSet<Portoflio>();
+            TeamMembers = new HashSet<TeamMember>();
+            TeamTransactions = new HashSet<TeamTransaction>();
             Teams = new HashSet<Team>();
         }
 
         [Key]
         public int Id { get; set; }
-        public bool? ActiveStatus { get; set; }
-        public int? NumberOfClients { get; set; }
-        [Column(TypeName = "numeric(18, 0)")]
-        public decimal? Phone { get; set; }
-        public double? AVGHourlyRate { get; set; }
-        [Column(TypeName = "image")]
-        public byte[] Image { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime? Birthday { get; set; }
-        [Column(TypeName = "money")]
-        public decimal? AvailableMoney { get; set; }
         [Column(TypeName = "money")]
         public decimal? TotalMoney { get; set; }
-        public string Bio { get; set; }
-        public int? UserId { get; set; }
-        public int? AdminId { get; set; }
-        public int? WalletId { get; set; }
-        public Guid? IdentityVerfication { get; set; }
+        public int? NumberOfClients { get; set; }
+        public double? AVGHourlyRate { get; set; }
 
-        [ForeignKey("AdminId")]
-        [InverseProperty("Freelancers")]
-        public virtual Admin Admin { get; set; }
-        [ForeignKey("UserId")]
-        [InverseProperty("Freelancers")]
-        public virtual UserAccount User { get; set; }
-        [ForeignKey("WalletId")]
-        [InverseProperty("Freelancers")]
-        public virtual Wallet Wallet { get; set; }
+        [ForeignKey("Id")]
+        [InverseProperty("FreelancerNavigation")]
+        public virtual User IdNavigation { get; set; }
         [InverseProperty("Freelancer")]
-        public virtual ICollection<Certificate> Certificates { get; set; }
+        public virtual ICollection<FreelancerCertificate> FreelancerCertificates { get; set; }
         [InverseProperty("Freelancer")]
-        public virtual ICollection<Complain> Complains { get; set; }
+        public virtual ICollection<FreelancerEducation> FreelancerEducations { get; set; }
         [InverseProperty("Freelancer")]
-        public virtual ICollection<Education> Educations { get; set; }
+        public virtual ICollection<FreelancerExperience> FreelancerExperiences { get; set; }
         [InverseProperty("Freelancer")]
-        public virtual ICollection<Experience> Experiences { get; set; }
-        [InverseProperty("Freelancer")]
-        public virtual ICollection<FreelancerAccountBank> FreelancerAccountBanks { get; set; }
-        [InverseProperty("Freelacer")]
-        public virtual ICollection<FreelancerCredit> FreelancerCredits { get; set; }
-        [InverseProperty("Freelancer")]
-        public virtual ICollection<FreelancerHasSkill> FreelancerHasSkills { get; set; }
-        [InverseProperty("Freelancer")]
-        public virtual ICollection<FreelancerJoinTeam> FreelancerJoinTeams { get; set; }
-        [InverseProperty("Freelancer")]
-        public virtual ICollection<FreelancerLanguage> FreelancerLanguages { get; set; }
-        [InverseProperty("Freelancer")]
-        public virtual ICollection<FreelancerTeamTransaction> FreelancerTeamTransactions { get; set; }
+        public virtual ICollection<FreelancerSkill> FreelancerSkills { get; set; }
         [InverseProperty("Freelancer")]
         public virtual ICollection<Portoflio> Portoflios { get; set; }
+        [InverseProperty("Freelancer")]
+        public virtual ICollection<TeamMember> TeamMembers { get; set; }
+        [InverseProperty("Freelancer")]
+        public virtual ICollection<TeamTransaction> TeamTransactions { get; set; }
         [InverseProperty("Leader")]
         public virtual ICollection<Team> Teams { get; set; }
     }

@@ -8,24 +8,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("TeamBidsProject")]
-    public partial class TeamBidsProject
+    public partial class TeamMember
     {
         [Key]
         public int TeamId { get; set; }
         [Key]
-        public int ProjectId { get; set; }
-        public string Message { get; set; }
-        [Column(TypeName = "money")]
-        public decimal? Money { get; set; }
-        [StringLength(50)]
-        public string Duration { get; set; }
+        public int FreelancerId { get; set; }
+        public bool? AccessAllowed { get; set; }
 
-        [ForeignKey("ProjectId")]
-        [InverseProperty("TeamBidsProjects")]
-        public virtual Project Project { get; set; }
+        [ForeignKey("FreelancerId")]
+        [InverseProperty("TeamMembers")]
+        public virtual Freelancer Freelancer { get; set; }
         [ForeignKey("TeamId")]
-        [InverseProperty("TeamBidsProjects")]
+        [InverseProperty("TeamMembers")]
         public virtual Team Team { get; set; }
     }
 }

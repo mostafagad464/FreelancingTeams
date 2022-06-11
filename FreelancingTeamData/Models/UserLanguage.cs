@@ -8,16 +8,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("ClientCredit")]
-    public partial class ClientCredit
+    [Table("UserLanguage")]
+    public partial class UserLanguage
     {
         [Key]
-        public int ClientId { get; set; }
+        public int UserId { get; set; }
         [Key]
-        public int CreditNumber { get; set; }
+        [StringLength(50)]
+        public string Language { get; set; }
 
-        [ForeignKey("ClientId")]
-        [InverseProperty("ClientCredits")]
-        public virtual Client Client { get; set; }
+        [ForeignKey("UserId")]
+        [InverseProperty("UserLanguages")]
+        public virtual User User { get; set; }
     }
 }

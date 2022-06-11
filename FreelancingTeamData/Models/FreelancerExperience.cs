@@ -8,28 +8,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("Experience")]
-    public partial class Experience
+    [Table("FreelancerExperience")]
+    public partial class FreelancerExperience
     {
         [Key]
         public int FreelancerId { get; set; }
         [Key]
-        [StringLength(50)]
-        public string JobTitle { get; set; }
-        [Key]
-        [StringLength(50)]
-        public string CompanyName { get; set; }
         [Column(TypeName = "date")]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         [Column(TypeName = "date")]
         public DateTime? EndDate { get; set; }
+        [StringLength(50)]
+        public string JobTitle { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string CompanyName { get; set; }
         public bool? CurentllyWorking { get; set; }
         [StringLength(50)]
         public string JobKind { get; set; }
         public string Summary { get; set; }
 
         [ForeignKey("FreelancerId")]
-        [InverseProperty("Experiences")]
+        [InverseProperty("FreelancerExperiences")]
         public virtual Freelancer Freelancer { get; set; }
     }
 }

@@ -8,20 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingTeamData.Models
 {
-    [Table("Social")]
-    public partial class Social
+    [Table("UserCredit")]
+    public partial class UserCredit
     {
         [Key]
         public int UserId { get; set; }
         [Key]
-        [StringLength(50)]
-        [Unicode(false)]
-        public string Type { get; set; }
-        [Unicode(false)]
-        public string Link { get; set; }
+        public int CreditNumber { get; set; }
 
         [ForeignKey("UserId")]
-        [InverseProperty("Socials")]
-        public virtual UserAccount User { get; set; }
+        [InverseProperty("UserCredits")]
+        public virtual User User { get; set; }
     }
 }
