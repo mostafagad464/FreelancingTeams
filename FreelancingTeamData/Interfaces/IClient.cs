@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IClient<T>
+    public interface IClient<T>:IUser<T>
     {
         public Task<T> ChooseTeam(int TeamId);
         

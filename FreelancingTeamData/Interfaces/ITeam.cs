@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface ITeam <T>
+    public interface ITeam <T>:ICRUD<T>
     {
 
         public Task<T> SubmitProject(T _object);

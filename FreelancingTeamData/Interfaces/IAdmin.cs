@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IAdmin <T>
+    public interface IAdmin <T>: IAccount<T>
     {
         public Task<T> HandleComplain(T _objeect);
         public Task<T> ValidateUserProfile(T _object);

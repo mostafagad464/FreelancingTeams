@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IAccount<T>
+    public interface IAccount<T>:ICRUD<T>
     {
         public Task<T> Login(string mail, string password);
         //public Boolean Register(T _object);

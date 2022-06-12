@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IFreelancer<T>
+    public interface IFreelancer<T>:IUser<T>
     {
 
         // Create Team =>> wil implemented from ICRUD interface. 

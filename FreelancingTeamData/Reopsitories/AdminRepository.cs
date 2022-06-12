@@ -9,80 +9,71 @@ using FreelancingTeamData.Models;
 
 namespace FreelancingTeamData.Reopsitories
 {
-    public class ClientRepository:IClient<Client>
+    internal class AdminRepository: IAdmin<Admin>
     {
         FreeLanceProjectContext db = new FreeLanceProjectContext();
-        public ClientRepository(FreeLanceProjectContext _db)
+
+        public AdminRepository(FreeLanceProjectContext _db)
         {
             db = _db;
         }
 
-        public Task<Client> ChooseTeam(int TeamId)
+        public Task<Admin> Create(Admin _object)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> CompleteProfile(Client _object)
+        public Task<Admin> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> Create(Client _object)
+        public Task<Admin> DeliverPayment(Admin _object)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> Delete(int id)
+        public Task<IEnumerable<Admin>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> EditProjectStatus(Client Oject)
+        public Task<Admin> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Client>> GetAll()
+        public Task<Admin> HandleComplain(Admin _objeect)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> GetById(int id)
+        public Task<Admin> Login(string mail, string password)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> Login(string mail, string password)
+        public Task<Admin> RefoundPayment(Admin _object)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> PayPayment(string _object)
+        public Task<Admin> ShowNotifications(int AccountId, Admin _object)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> PostProject(Client _object, IEnumerable<Client> _objects)
+        public Task<Admin> TransferPayment(Admin _object)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Client>> SearchForTeamByName(string TeamName)
+        public Task<Admin> Update(int id, Admin _object)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Client>> SearchForTeamBySkills(IEnumerable<Client> _objects)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Client> ShowNotifications(int AccountId, Client _object)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Client> Update(int id, Client _object)
+        public Task<Admin> ValidateUserProfile(Admin _object)
         {
             throw new NotImplementedException();
         }
