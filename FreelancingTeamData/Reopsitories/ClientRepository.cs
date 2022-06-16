@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using FreelancingTeamData.Interfaces;
 using FreelancingTeamData.Data;
 using FreelancingTeamData.Models;
+using System.Data.Entity;
 
 namespace FreelancingTeamData.Reopsitories
 {
     public class ClientRepository:IClient<Client>
     {
-        FreeLanceProjectContext db = new FreeLanceProjectContext();
+        private readonly FreeLanceProjectContext db;
         public ClientRepository(FreeLanceProjectContext _db)
         {
             db = _db;
@@ -31,6 +32,22 @@ namespace FreelancingTeamData.Reopsitories
         {
             throw new NotImplementedException();
         }
+
+        //public async Task<Client> Create(Client _object)
+        //{
+        //    try
+        //    {
+        //        var obj = await db.Clients.AddAsync(_object);
+        //        await db.SaveChangesAsync();
+        //        if (obj != null)
+        //            return obj.Entity;
+        //        return null;
+        //    }
+        //    catch(Exception)
+        //    {
+        //        return null;
+        //    }
+        //}
 
         public Task<Client> Delete(int id)
         {
@@ -57,12 +74,28 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
+        //public async Task<Client> Login(string email, string password)
+        //{
+
+        //    try
+        //    {
+        //        Account acc = await db.Accounts.Where(e => e.Email == email && e.Password == password).FirstOrDefaultAsync();
+        //        Client c = await db.Clients.Where(e => e.Id == acc.Id).FirstOrDefaultAsync();
+        //        return c;
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
+
+
         public Task<Client> PayPayment(string _object)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Client> PostProject(Client _object, IEnumerable<Client> _objects)
+        public Task<Client> PostProject(Client _object)
         {
             throw new NotImplementedException();
         }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FreelancingTeamData.Models
 {
@@ -28,5 +29,15 @@ namespace FreelancingTeamData.Models
         [ForeignKey("TeamId")]
         [InverseProperty("TeamTransactions")]
         public virtual Team Team { get; set; }
+
+        public static implicit operator TeamTransaction(EntityEntry<TeamTransaction> v)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public static implicit operator TeamTransaction(void v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

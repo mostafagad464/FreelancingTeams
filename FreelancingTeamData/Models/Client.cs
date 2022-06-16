@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FreelancingTeamData.Models
 {
@@ -36,5 +37,10 @@ namespace FreelancingTeamData.Models
         public virtual ICollection<Review> Reviews { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<TeamFreelancerMessage> TeamFreelancerMessages { get; set; }
+
+        public static implicit operator Client(EntityEntry<Client> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

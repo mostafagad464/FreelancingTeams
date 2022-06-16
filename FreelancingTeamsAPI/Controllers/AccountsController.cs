@@ -16,13 +16,10 @@ namespace FreelancingTeamsAPI.Controllers
     public class AccountsController : ControllerBase
     {
 
-        //private readonly FreeLanceProjectContext _context;
-        private readonly ICRUD<Account> crud;
         private readonly IAccount<Account> account;
 
-        public AccountsController(ICRUD<Account> _crud, IAccount<Account> _account)
+        public AccountsController( IAccount<Account> _account)
         {
-            crud = _crud;
             account = _account;
         }
 
@@ -31,7 +28,7 @@ namespace FreelancingTeamsAPI.Controllers
         public async Task<ActionResult<IEnumerable<Account>>> GetUserAccounts()
         {
             //var obj = await crud.GetAll();
-            var obj = await crud.GetAll();
+            var obj = await account.GetAll();
             if (obj != null)
             //if (_context.UserAccounts == null)
             {
@@ -40,7 +37,7 @@ namespace FreelancingTeamsAPI.Controllers
             }
             return NotFound();
         }
-        
+
         // GET: api/UserAccounts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetUserAccount(int id)
@@ -50,10 +47,10 @@ namespace FreelancingTeamsAPI.Controllers
             //{
             //    return NotFound();
             //}
-            if (id!=0)
+            if (id != 0)
             {
-                var obj = await crud.GetById(id);
-                if(obj!=null)
+                var obj = await account.GetById(id);
+                if (obj != null)
                 {
                     return Ok(obj);
                 }
@@ -77,7 +74,7 @@ namespace FreelancingTeamsAPI.Controllers
 
             if (id != 0 && userAccount != null)
             {
-                var obj = await crud.Update(id, userAccount);
+                var obj = await account.Update(id, userAccount);
                 if (obj != null)
                 {
                     return Ok(obj);
@@ -127,7 +124,7 @@ namespace FreelancingTeamsAPI.Controllers
         {
             if (Account != null)
             {
-                var obj = await crud.Create(Account);
+                var obj = await account.Create(Account);
                 if (obj != null)
                 {
                     string url = HttpContext.Request.Path.Value;
@@ -150,7 +147,7 @@ namespace FreelancingTeamsAPI.Controllers
             {
                 //return NotFound();
 
-                var userAccount = await crud.Delete(id);
+                var userAccount = await account.Delete(id);
                 if (userAccount != null)
                 {
                     return Ok(userAccount);
@@ -176,15 +173,15 @@ namespace FreelancingTeamsAPI.Controllers
         {
             if (email != null && password != null)
             {
-                var obj = await  account.Login(email, password);
+                var obj = await account.Login(email, password);
                 if (obj != null)
                     return Ok(obj);
                 return NotFound();
-            }            
+            }
             return BadRequest();
         }
 
-        
-        
+
+
     }
 }

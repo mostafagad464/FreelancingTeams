@@ -8,10 +8,12 @@ namespace FreelancingTeamData.Interfaces
 {
     public interface IProject<T>
     {
-        public Task<T> Deal(T Oject);
-        public Task<T> CheckProjectCompletion(T Oject);
-        public Task<T> Review(T Oject);
-        public Task<T> CancelProject(T Oject);
+        public Task<T> PostProject(T _object);
+
+        public Task<T> Deal(T _object);
+        public Task<T> CheckProjectCompletion(T _object);
+        public Task<T> Review(T _object);
+        public Task<T> CancelProject(T _object);
 
         
 

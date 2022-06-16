@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FreelancingTeamData.Models
 {
@@ -27,5 +28,10 @@ namespace FreelancingTeamData.Models
 
         [InverseProperty("Transaction")]
         public virtual ICollection<ProjectPayment> ProjectPayments { get; set; }
+
+        public static implicit operator Transaction(EntityEntry<Transaction> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

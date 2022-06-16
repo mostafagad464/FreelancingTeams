@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FreelancingTeamData.Models
 {
@@ -58,5 +59,10 @@ namespace FreelancingTeamData.Models
         [ForeignKey("ProjectId")]
         [InverseProperty("Projects")]
         public virtual ICollection<Skill> Skills { get; set; }
+
+        public static implicit operator Project(EntityEntry<Project> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

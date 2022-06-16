@@ -18,10 +18,16 @@ var builder = WebApplication.CreateBuilder(args);
 //    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 builder.Services.AddDbContext<FreeLanceProjectContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// for scaffolding problem
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
 // Dependancy Injection
-builder.Services.AddScoped<ICRUD<Account>, AccountRepository>();
+//builder.Services.AddScoped<ICRUD<Account>, AccountRepository>();
 builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
+builder.Services.AddScoped<IClient<Client>, ClientRepository>();
+builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
+builder.Services.AddScoped<ITransaction<Transaction>, TransactionRepository>();
 
 
 

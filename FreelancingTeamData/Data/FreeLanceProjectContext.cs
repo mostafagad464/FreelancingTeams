@@ -18,6 +18,9 @@ namespace FreelancingTeamData.Data
             : base(options)
         {
         }
+        //public FreeLanceProjectContext(DbContextOptions options) : base(options)
+        //{
+        //}
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountMessage> AccountMessages { get; set; }
@@ -49,14 +52,14 @@ namespace FreelancingTeamData.Data
         public virtual DbSet<UserSocial> UserSocials { get; set; }
         public virtual DbSet<Wallet> Wallets { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=projectdatabase.database.windows.net;Initial Catalog=FreelancingTeams;Persist Security Info=True;User ID=noah;Password=pass123$");
-            }
-        }
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        //                optionsBuilder.UseSqlServer("Data Source=projectdatabase.database.windows.net;Initial Catalog=FreelancingTeams;Persist Security Info=True;User ID=noah;Password=pass123$");
+        //            }
+        //        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
