@@ -64,7 +64,7 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
-        public Task<Team> Update(int id, Team _object)
+        public Task<Team> Update(Team _object)
         {
             throw new NotImplementedException();
         }

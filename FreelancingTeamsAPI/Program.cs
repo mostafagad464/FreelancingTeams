@@ -28,6 +28,12 @@ builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
 builder.Services.AddScoped<IClient<Client>, ClientRepository>();
 builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
 builder.Services.AddScoped<ITransaction<Transaction>, TransactionRepository>();
+builder.Services.AddScoped<ICategory<Category>, CategoryRepository>();
+builder.Services.AddScoped<ISkill<Skill>, SkillRepository>();
+builder.Services.AddScoped<IUserCredit<UserCredit>, UserCreditRepository>();
+builder.Services.AddScoped<IUserLanguage<UserLanguage>, UserLanguageRepository>();
+builder.Services.AddScoped<IUserSocial<UserSocial>, UserSocialRepository>();
+
 
 
 
