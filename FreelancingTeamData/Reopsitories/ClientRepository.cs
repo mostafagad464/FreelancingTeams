@@ -115,7 +115,7 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
-        public Task<Client> Update(int id, Client _object)
+        public Task<Client> Update(Client _object)
         {
             throw new NotImplementedException();
         }

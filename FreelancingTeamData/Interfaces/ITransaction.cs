@@ -7,12 +7,16 @@ using FreelancingTeamData.Models;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface ITransaction<T>
+    public interface ITransaction<T1,T2>
     {
         //public Task<T> ProjectPayment(T _object, T _transaction);
         //public Task<T> ProjectPayment(T _object, int money, string method, DateTime dateTime);
-        public Task<T> ProjectPayment(T _object, int clientId, int projectId);
         //public Task<T> TeamTransactions(T _object);
-        public Task<ICollection<TeamTransaction>> TeamTransactions(List<TeamTransaction> _objects);
+
+        public Task<T1> ProjectPayment(T1 _Transaction);
+        public Task<T2> TransferredMoney(T2 _projectPayment);
+        public Task<T2> RefundedMony(T2 _projectPayment);
+
+        //public Task<ICollection<TeamTransaction>> TeamTransactions(List<TeamTransaction> _objects);
     }
 }

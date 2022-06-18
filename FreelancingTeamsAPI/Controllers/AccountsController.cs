@@ -74,7 +74,7 @@ namespace FreelancingTeamsAPI.Controllers
 
             if (id != 0 && userAccount != null)
             {
-                var obj = await account.Update(id, userAccount);
+                var obj = await account.Update(userAccount);
                 if (obj != null)
                 {
                     return Ok(obj);
