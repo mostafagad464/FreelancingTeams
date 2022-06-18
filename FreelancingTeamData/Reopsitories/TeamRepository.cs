@@ -10,7 +10,7 @@ using FreelancingTeamData.Models;
 
 namespace FreelancingTeamData.Reopsitories
 {
-    internal class TeamRepository:ITeam<Team>
+    internal class TeamRepository : ITeam<Team>
     {
         FreeLanceProjectContext db = new FreeLanceProjectContext();
 
@@ -64,7 +64,12 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
-        public Task<Team> Update(int id, Team _object)
+        public Task<Team> Update(Team _object)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> ICRUD<Team>.Delete(int id)
         {
             throw new NotImplementedException();
         }

@@ -20,65 +20,149 @@ namespace FreelancingTeamData.Reopsitories
             db = _db;
         }
 
-        public virtual async Task<Account> Create(Account _object)
+        public virtual async Task<Account> Create(Account account)
         {
             try
             {
-                var obj = await db.Accounts.AddAsync(_object);
+                if (db.Accounts == null)
+                {
+                    return null;
+                }
+                db.Accounts.Add(account);
                 await db.SaveChangesAsync();
-                return obj.Entity;
+                if(account.Type == "Admin")
+                {
+                    if (db.Admins == null)
+                    {
+                        return null;
+                    }
+                    db.Admins.Add(new Admin { Id = account.Id});
+                    try
+                    {
+                        await db.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException)
+                    {
+                        if (AdminExists(account.Id))
+                        {
+                            return new Account { Id = 0 };
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                }
+                return account;
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
         }
 
-        public virtual async Task<Account> Delete(int id)
+        public virtual async Task<bool> Delete(int id)
         {
             try
             {
-                var obj = await db.Accounts.FindAsync(id);
-                db.Remove(obj);
+                if (db.Accounts == null)
+                {
+                    return false;
+                }
+                var account = await db.Accounts.FindAsync(id);
+                if (account == null)
+                {
+                    return false;
+                }
+                if(account.Type == "Admin")
+                {
+                    var admin = await db.Admins.FindAsync(id);
+                    db.Admins.Remove(admin);
+                    await db.SaveChangesAsync();
+                }
+                db.Accounts.Remove(account);
                 await db.SaveChangesAsync();
-                return obj;
+                return true;
             }
-            catch (Exception)
+            catch
             {
-                return null;
+                return false;
             }
         }
-
-        // I think implimentation must be in admin
+     
+        
         public virtual async Task<IEnumerable<Account>> GetAll()
         {
             try
             {
+                if (db.Accounts == null)
+                {
+                    return null;
+                }
                 return await db.Accounts.ToListAsync();
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
+        }
+        public async Task<IEnumerable<Account>> GetAdmins()
+        {
+            if (db.Accounts == null)
+            {
+                return null;
+            }
+            return await db.Accounts.Where(a => a.Type == "Admin").ToListAsync();
         }
 
         public virtual async Task<Account> GetById(int id)
         {
             try
             {
+                if (db.Accounts == null)
+                {
+                    return null;
+                }
                 return await db.Accounts.FindAsync(id);
             }
-            catch (Exception)
+            catch
             {
                 return null;
             }
         }
 
-        public async Task<Account> Login(string email, string password)
+        public virtual async Task<Account> Update(Account account)
         {
             try
             {
-                var obj = await db.Accounts.Where(e => e.Email == email && e.Password == password).FirstOrDefaultAsync();
+                db.Entry(account).State = EntityState.Modified;
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AccountExists(account.Id))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return account;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public async Task<Account> Login(string usernameORemail, string password)
+        {
+            try
+            {
+                var obj = await db.Accounts.Where(e => (e.Email == usernameORemail || e.Username == usernameORemail) && e.Password == password).FirstOrDefaultAsync();
                 return obj;
             }
             catch (Exception)
@@ -86,27 +170,23 @@ namespace FreelancingTeamData.Reopsitories
                 return null;
             }
         }
-
-        public Task<Account> ShowNotifications(int AccountId, Account _object)
+        private bool AccountExists(int id)
         {
-            throw new NotImplementedException();
+            return (db.Accounts?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public virtual async Task<Account> Update(int id, Account _object)
+        private bool AdminExists(int id)
         {
-            try
-            {
-                var obj = await db.Accounts.FindAsync(id);
-                obj.FirstName = _object.FirstName;
-                obj.LastName = _object.LastName;
-                obj.Email = _object.Email;
-                obj.Password = _object.Password;
-                return obj;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return (db.Admins?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+       
+
+
+
+        //public Task<Account> ShowNotifications(int AccountId, Account _object)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

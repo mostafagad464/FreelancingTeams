@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    internal interface IComplain <T>
+    internal interface IComplain <T> : ICRUD<T>
     {
         public Task<T> Complain(T _object);
     }

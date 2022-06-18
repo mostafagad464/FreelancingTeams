@@ -7,6 +7,9 @@ using FreelancingTeamData.Data;
 using FreelancingTeamData.Interfaces;
 using FreelancingTeamData.Reopsitories;
 using FreelancingTeamData.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Text.Json.Serialization;
 
 string s = "";
 
@@ -25,14 +28,17 @@ builder.Services.AddDbContext<FreeLanceProjectContext>(option =>
 // Dependancy Injection
 //builder.Services.AddScoped<ICRUD<Account>, AccountRepository>();
 builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
-builder.Services.AddScoped<IClient<Client>, ClientRepository>();
+builder.Services.AddScoped<IUser<User>, UserRepository>();
 builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
 builder.Services.AddScoped<ITransaction<Transaction>, TransactionRepository>();
+builder.Services.AddScoped<IReview<Review>, ReviewRepository>();
 
 
 
 
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -48,6 +54,21 @@ builder.Services.AddCors(opstion =>
         });
 });
 
+//JWT 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateLifetime = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("welcome to my key"))
+
+    };
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,7 +80,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
