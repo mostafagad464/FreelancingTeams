@@ -10,7 +10,8 @@ namespace FreelancingTeamData.Interfaces
     {
         public Task<T> Create(T _object);
 
-        public Task<T> Update(int id, T _object);
+        //public Task<T> Update(int id, T _object);
+        public Task<T> Update(T _object);
 
         public Task<T> Delete(int id);
 

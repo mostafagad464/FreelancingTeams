@@ -28,7 +28,11 @@ builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
 builder.Services.AddScoped<IClient<Client>, ClientRepository>();
 builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
 builder.Services.AddScoped<ITransaction<Transaction>, TransactionRepository>();
-
+builder.Services.AddScoped<IComplain<Complain>, ComplainRepository>();
+builder.Services.AddScoped<IExperience<FreelancerExperience>, FreelancerExperienceRepository>();
+builder.Services.AddScoped<IEducationSkill<FreelancerEducation>, FreelancerEducationRepository>();
+builder.Services.AddScoped<IEducationSkill<FreelancerSkill>, FreelancerSkillRepository>();
+builder.Services.AddScoped<ICertificate<FreelancerCertificate>, FreelancerCertificateRepository>();
 
 
 
