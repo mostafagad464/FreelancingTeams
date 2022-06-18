@@ -8,6 +8,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.EntityFrameworkCore;
 using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
+
 namespace FreelancingTeamData.Models
 {
     [Table("Team")]

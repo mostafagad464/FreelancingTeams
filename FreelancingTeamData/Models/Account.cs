@@ -24,7 +24,7 @@ namespace FreelancingTeamData.Models
 
         [Key]
         public int Id { get; set; }
-        public int? IdentityId { get; set; }
+        public string? IdentityId { get; set; }
         [StringLength(50)]
         [Unicode(false)]
         public string Email { get; set; }

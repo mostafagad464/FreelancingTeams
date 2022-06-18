@@ -17,6 +17,14 @@ namespace FreelancingTeamData.Data
         public FreeLanceProjectContext(DbContextOptions<FreeLanceProjectContext> options)
             : base(options)
         {
+            
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("DefaultConnection");
+            }
         }
         //public FreeLanceProjectContext(DbContextOptions options) : base(options)
         //{
