@@ -33,18 +33,20 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public virtual async Task<Skill> Delete(int id)
+        public virtual async Task<bool> Delete(int id)
         {
             try
             {
                 var obj = await db.Skills.FindAsync(id);
                 db.Remove(obj);
                 await db.SaveChangesAsync();
-                return obj;
+                if(obj != null)
+                    return true;
+                return false;
             }
             catch (Exception)
             {
-                return null;
+                return false;
             }
         }
 

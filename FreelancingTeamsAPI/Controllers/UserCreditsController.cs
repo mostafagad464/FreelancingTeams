@@ -51,18 +51,12 @@ namespace FreelancingTeamsAPI.Controllers
             if (id != 0)
             {
 
-                var usercredit = await _userCredit.Delete(id,creditNum);
-                if (usercredit != null)
-                {
-                    return Ok(usercredit);
-                }
-                else
+                bool usercredit = await _userCredit.Delete(id,creditNum);
+                if (usercredit == true)
                 {
                     return NoContent();
-
                 }
-
-
+                return BadRequest();
             }
             return BadRequest();
         }

@@ -33,18 +33,20 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public async Task<UserLanguage> Delete(int userId, string language)
+        public async Task<bool> Delete(int userId, string language)
         {
             try
             {
                 var obj = await db.UserLanguages.FindAsync(userId, language);
                 db.Remove(obj);
                 await db.SaveChangesAsync();
-                return obj;
+                if (obj != null)
+                    return true;
+                return false;
             }
             catch (Exception)
             {
-                return null;
+                return false;
             }
         }
 

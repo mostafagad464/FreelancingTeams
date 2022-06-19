@@ -32,18 +32,20 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public async Task<UserCredit> Delete(int userId, int creditNum)
+        public async Task<bool> Delete(int userId, int creditNum)
         {
             try
             {
                 var obj = await db.UserCredits.FirstOrDefaultAsync(a => a.UserId == userId && a.CreditNumber == creditNum);
                 db.Remove(obj);
                 await db.SaveChangesAsync();
-                return obj;
+                if(obj != null)
+                    return true;
+                return false;
             }
             catch (Exception)
             {
-                return null;
+                return false;
             }
         }
 

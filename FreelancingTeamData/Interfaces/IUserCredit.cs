@@ -13,7 +13,7 @@ namespace FreelancingTeamData.Interfaces
 
         public Task<IEnumerable<T>> GetAll();
 
-        public Task<T> Delete(int userId, int creditNum);
+        public Task<bool> Delete(int userId, int creditNum);
 
         public Task<T> GetById(int userId, int creditNum);
 

@@ -51,16 +51,8 @@ namespace FreelancingTeamsAPI.Controllers
 
                 var skill = await _skill.Delete(id);
                 if (skill != null)
-                {
-                    return Ok(skill);
-                }
-                else
-                {
                     return NoContent();
-
-                }
-
-
+                return BadRequest();
             }
             return BadRequest();
         }

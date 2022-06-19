@@ -49,19 +49,10 @@ namespace FreelancingTeamsAPI.Controllers
         {
             if (id != 0)
             {
-
                 var category = await _category.Delete(id);
                 if (category != null)
-                {
-                    return Ok(category);
-                }
-                else
-                {
                     return NoContent();
-
-                }
-            
-
+                return BadRequest();
             }
             return BadRequest();
         }

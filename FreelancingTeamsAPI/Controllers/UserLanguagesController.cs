@@ -51,18 +51,12 @@ namespace FreelancingTeamsAPI.Controllers
             if (id != 0 && userLanguage != "")
             {
 
-                var userlanguage = await _userLanguage.Delete(id, userLanguage);
-                if (userlanguage != null)
-                {
-                    return Ok(userlanguage);
-                }
-                else
+                bool userlanguage = await _userLanguage.Delete(id, userLanguage);
+                if (userlanguage == true)
                 {
                     return NoContent();
-
                 }
-
-
+                return BadRequest();
             }
             return BadRequest();
         }

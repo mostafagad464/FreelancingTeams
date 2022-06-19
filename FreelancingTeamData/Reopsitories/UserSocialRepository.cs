@@ -31,18 +31,20 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public virtual async Task<UserSocial> Delete(int userId, string type)
+        public virtual async Task<bool> Delete(int userId, string type)
         {
             try
             {
                 var obj = await db.UserSocials.FindAsync(userId, type);
                 db.Remove(obj);
                 await db.SaveChangesAsync();
-                return obj;
+                if (obj != null)
+                    return true;
+                return false;
             }
             catch (Exception)
             {
-                return null;
+                return false;
             }
         }
 
