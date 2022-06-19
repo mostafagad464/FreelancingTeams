@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    internal interface IComplain <T> : ICRUD<T>
+    public  interface IComplain <T> : ICRUD<T>
     {
-        public Task<T> Complain(T _object);
+        public Task<T> IsHandeled(T _object);   
     }
 }
