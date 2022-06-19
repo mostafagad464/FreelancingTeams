@@ -31,6 +31,12 @@ builder.Services.AddDbContext<FreeLanceProjectContext>(option =>
 builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
 builder.Services.AddScoped<IUser<User>, UserRepository>();
 builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
+builder.Services.AddScoped<ICategory<Category>, CategoryRepository>();
+builder.Services.AddScoped<ISkill<Skill>, SkillRepository>();
+builder.Services.AddScoped<IUserCredit<UserCredit>, UserCreditRepository>();
+builder.Services.AddScoped<IUserLanguage<UserLanguage>, UserLanguageRepository>();
+builder.Services.AddScoped<IUserSocial<UserSocial>, UserSocialRepository>();
+
 builder.Services.AddScoped<ITransaction<Transaction, ProjectPayment>, TransactionRepository>();
 builder.Services.AddScoped<ITeamTransactions<TeamTransaction>, TeamTransactionRepository>();
 builder.Services.AddScoped<IReview<Review>, ReviewRepository>();
