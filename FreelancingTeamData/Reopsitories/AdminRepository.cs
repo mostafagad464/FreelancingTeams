@@ -23,7 +23,7 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
-        public Task<Admin> Delete(int id)
+        public Task<bool> Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -68,7 +68,7 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
-        public Task<Admin> Update(int id, Admin _object)
+        public Task<Admin> Update( Admin _object)
         {
             throw new NotImplementedException();
         }

@@ -28,6 +28,9 @@ builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
 builder.Services.AddScoped<IClient<Client>, ClientRepository>();
 builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
 builder.Services.AddScoped<ITransaction<Transaction>, TransactionRepository>();
+builder.Services.AddScoped<IPortoflio<Portoflio>, PortoflioRepository>();
+builder.Services.AddScoped<IWallet<Wallet>, WalletRepository>();
+
 
 
 

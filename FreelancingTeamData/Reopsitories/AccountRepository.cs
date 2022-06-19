@@ -34,18 +34,18 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
-        public virtual async Task<Account> Delete(int id)
+        public virtual async Task<bool> Delete(int id)
         {
             try
             {
                 var obj = await db.Accounts.FindAsync(id);
                 db.Remove(obj);
                 await db.SaveChangesAsync();
-                return obj;
+                return true;
             }
             catch (Exception)
             {
-                return null;
+                return false;
             }
         }
 
@@ -92,11 +92,11 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
-        public virtual async Task<Account> Update(int id, Account _object)
+        public virtual async Task<Account> Update(Account _object)
         {
             try
             {
-                var obj = await db.Accounts.FindAsync(id);
+                var obj = await db.Accounts.FindAsync(_object.Id);
                 obj.FirstName = _object.FirstName;
                 obj.LastName = _object.LastName;
                 obj.Email = _object.Email;
