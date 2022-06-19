@@ -31,6 +31,8 @@ builder.Services.AddDbContext<FreeLanceProjectContext>(option =>
 builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
 builder.Services.AddScoped<IUser<User>, UserRepository>();
 builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
+builder.Services.AddScoped<IPortoflio<Portoflio>, PortoflioRepository>();
+builder.Services.AddScoped<IWallet<Wallet>, WalletRepository>();
 builder.Services.AddScoped<IComplain<Complain>, ComplainRepository>();
 builder.Services.AddScoped<IExperience<FreelancerExperience>, FreelancerExperienceRepository>();
 builder.Services.AddScoped<IEducationSkill<FreelancerEducation>, FreelancerEducationRepository>();
