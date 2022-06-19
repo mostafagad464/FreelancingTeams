@@ -26,13 +26,6 @@ namespace FreelancingTeamData.Data
         {
             
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("DefaultConnection");
-            }
-        }
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountMessage> AccountMessages { get; set; }

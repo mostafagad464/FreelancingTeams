@@ -90,11 +90,12 @@ namespace FreelancingTeamsAPI.Controllers
             var obj = await _complain.GetById(id);
             if(obj != null)
             {
-                var obj1 = await _complain.Delete(obj.Id);
-                if(obj1 != null)
+                bool obj1 = await _complain.Delete(obj.Id);
+                if(obj1 == true)
                 {
-                    return Ok(obj1);
+                    return NoContent();
                 }
+                return BadRequest();
             }
             return BadRequest();          
         }

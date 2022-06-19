@@ -28,18 +28,20 @@ namespace FreelancingTeamData.Reopsitories
         }
 
 
-        public virtual async Task<Complain> Delete(int id)
+        public virtual async Task<bool> Delete(int id)
         {
             var obj = await db.Complains.FindAsync(id);
             if(obj != null)
             {
                 db.Complains.Remove(obj);
                 await db.SaveChangesAsync();
-                return obj;
+                if (obj != null)
+                    return true;
+                return false;
             }
             else
             {
-                return null;
+                return false;
             }
             
         }
