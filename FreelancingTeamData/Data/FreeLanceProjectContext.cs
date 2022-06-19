@@ -26,9 +26,6 @@ namespace FreelancingTeamData.Data
                 optionsBuilder.UseSqlServer("DefaultConnection");
             }
         }
-        //public FreeLanceProjectContext(DbContextOptions options) : base(options)
-        //{
-        //}
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountMessage> AccountMessages { get; set; }
@@ -60,15 +57,7 @@ namespace FreelancingTeamData.Data
         public virtual DbSet<UserSocial> UserSocials { get; set; }
         public virtual DbSet<Wallet> Wallets { get; set; }
 
-        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //        {
-        //            if (optionsBuilder.IsConfigured)
-        //            {
-        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        //                optionsBuilder.UseSqlServer("Data Source=projectdatabase.database.windows.net;Initial Catalog=FreelancingTeams;Persist Security Info=True;User ID=noah;Password=pass123$");
-        //            }
-        //        }
-
+   
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AccountMessage>(entity =>
@@ -76,12 +65,12 @@ namespace FreelancingTeamData.Data
                 entity.HasOne(d => d.Reciever)
                     .WithMany(p => p.AccountMessageRecievers)
                     .HasForeignKey(d => d.RecieverId)
-                    .HasConstraintName("FK__AccountMe__Recie__725BF7F6");
+                    .HasConstraintName("FK__AccountMe__Recie__5E1FF51F");
 
                 entity.HasOne(d => d.Sender)
                     .WithMany(p => p.AccountMessageSenders)
                     .HasForeignKey(d => d.SenderId)
-                    .HasConstraintName("FK__AccountMe__Sende__7167D3BD");
+                    .HasConstraintName("FK__AccountMe__Sende__5D2BD0E6");
             });
 
             modelBuilder.Entity<Admin>(entity =>
@@ -91,7 +80,7 @@ namespace FreelancingTeamData.Data
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.Admin)
                     .HasForeignKey<Admin>(d => d.Id)
-                    .HasConstraintName("FK__Admin__Id__47A6A41B");
+                    .HasConstraintName("FK__Admin__Id__7FB5F314");
             });
 
             modelBuilder.Entity<Category>(entity =>
@@ -100,11 +89,11 @@ namespace FreelancingTeamData.Data
                     .WithMany(p => p.Categories)
                     .UsingEntity<Dictionary<string, object>>(
                         "SkillCategory",
-                        l => l.HasOne<Skill>().WithMany().HasForeignKey("SkillId").HasConstraintName("FK__SkillCate__Skill__00DF2177"),
-                        r => r.HasOne<Category>().WithMany().HasForeignKey("CategoryId").HasConstraintName("FK__SkillCate__Categ__7FEAFD3E"),
+                        l => l.HasOne<Skill>().WithMany().HasForeignKey("SkillId").HasConstraintName("FK__SkillCate__Skill__2B947552"),
+                        r => r.HasOne<Category>().WithMany().HasForeignKey("CategoryId").HasConstraintName("FK__SkillCate__Categ__2AA05119"),
                         j =>
                         {
-                            j.HasKey("CategoryId", "SkillId").HasName("PK__SkillCat__74F333133F7F5537");
+                            j.HasKey("CategoryId", "SkillId").HasName("PK__SkillCat__74F33313388D917B");
 
                             j.ToTable("SkillCategory");
                         });
@@ -117,7 +106,7 @@ namespace FreelancingTeamData.Data
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.ClientNavigation)
                     .HasForeignKey<Client>(d => d.Id)
-                    .HasConstraintName("FK__Client__Id__6442E2C9");
+                    .HasConstraintName("FK__Client__Id__11D4A34F");
             });
 
             modelBuilder.Entity<Complain>(entity =>
@@ -125,41 +114,41 @@ namespace FreelancingTeamData.Data
                 entity.HasOne(d => d.AdminHandler)
                     .WithMany(p => p.Complains)
                     .HasForeignKey(d => d.AdminHandlerId)
-                    .HasConstraintName("FK__Complain__AdminH__5F492382");
+                    .HasConstraintName("FK__Complain__AdminH__6D6238AF");
 
                 entity.HasOne(d => d.ComplainingTeam)
                     .WithMany(p => p.Complains)
                     .HasForeignKey(d => d.ComplainingTeamId)
-                    .HasConstraintName("FK__Complain__Compla__5E54FF49");
+                    .HasConstraintName("FK__Complain__Compla__6C6E1476");
 
                 entity.HasOne(d => d.ComplainingUser)
                     .WithMany(p => p.Complains)
                     .HasForeignKey(d => d.ComplainingUserId)
-                    .HasConstraintName("FK__Complain__Compla__5D60DB10");
+                    .HasConstraintName("FK__Complain__Compla__6B79F03D");
             });
 
             modelBuilder.Entity<Deal>(entity =>
             {
                 entity.HasKey(e => new { e.ClientId, e.TeamId, e.ProjectId })
-                    .HasName("PK__Deal__962BAEE3E2E4D393");
+                    .HasName("PK__Deal__962BAEE3191C1A56");
 
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.Deals)
                     .HasForeignKey(d => d.ClientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Deal__ClientId__40C49C62");
+                    .HasConstraintName("FK__Deal__ClientId__4FD1D5C8");
 
                 entity.HasOne(d => d.Project)
                     .WithMany(p => p.Deals)
                     .HasForeignKey(d => d.ProjectId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Deal__ProjectId__42ACE4D4");
+                    .HasConstraintName("FK__Deal__ProjectId__51BA1E3A");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.Deals)
                     .HasForeignKey(d => d.TeamId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Deal__TeamId__41B8C09B");
+                    .HasConstraintName("FK__Deal__TeamId__50C5FA01");
             });
 
             modelBuilder.Entity<Freelancer>(entity =>
@@ -169,56 +158,56 @@ namespace FreelancingTeamData.Data
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.FreelancerNavigation)
                     .HasForeignKey<Freelancer>(d => d.Id)
-                    .HasConstraintName("FK__Freelancer__Id__671F4F74");
+                    .HasConstraintName("FK__Freelancer__Id__14B10FFA");
             });
 
             modelBuilder.Entity<FreelancerCertificate>(entity =>
             {
                 entity.HasKey(e => new { e.FreelancerId, e.Title })
-                    .HasName("PK__Freelanc__FFCB85214437D59E");
+                    .HasName("PK__Freelanc__FFCB8521DBDD6D3D");
 
                 entity.HasOne(d => d.Freelancer)
                     .WithMany(p => p.FreelancerCertificates)
                     .HasForeignKey(d => d.FreelancerId)
-                    .HasConstraintName("FK__Freelance__Freel__72910220");
+                    .HasConstraintName("FK__Freelance__Freel__1D4655FB");
             });
 
             modelBuilder.Entity<FreelancerEducation>(entity =>
             {
                 entity.HasKey(e => new { e.FreelancerId, e.gradYear })
-                    .HasName("PK__Freelanc__E5D6D5973A384268");
+                    .HasName("PK__Freelanc__E5D6D5979BA651C1");
 
                 entity.HasOne(d => d.Freelancer)
                     .WithMany(p => p.FreelancerEducations)
                     .HasForeignKey(d => d.FreelancerId)
-                    .HasConstraintName("FK__Freelance__Freel__6CD828CA");
+                    .HasConstraintName("FK__Freelance__Freel__178D7CA5");
             });
 
             modelBuilder.Entity<FreelancerExperience>(entity =>
             {
                 entity.HasKey(e => new { e.FreelancerId, e.StartDate })
-                    .HasName("PK__Freelanc__59E17CA3696AB00E");
+                    .HasName("PK__Freelanc__59E17CA330D926BC");
 
                 entity.HasOne(d => d.Freelancer)
                     .WithMany(p => p.FreelancerExperiences)
                     .HasForeignKey(d => d.FreelancerId)
-                    .HasConstraintName("FK__Freelance__Freel__6FB49575");
+                    .HasConstraintName("FK__Freelance__Freel__1A69E950");
             });
 
             modelBuilder.Entity<FreelancerSkill>(entity =>
             {
                 entity.HasKey(e => new { e.FreelancerId, e.SkillId })
-                    .HasName("PK__Freelanc__50FAEA744DA307A6");
+                    .HasName("PK__Freelanc__50FAEA74C8301E2D");
 
                 entity.HasOne(d => d.Freelancer)
                     .WithMany(p => p.FreelancerSkills)
                     .HasForeignKey(d => d.FreelancerId)
-                    .HasConstraintName("FK__Freelance__Freel__03BB8E22");
+                    .HasConstraintName("FK__Freelance__Freel__2E70E1FD");
 
                 entity.HasOne(d => d.Skill)
                     .WithMany(p => p.FreelancerSkills)
                     .HasForeignKey(d => d.SkillId)
-                    .HasConstraintName("FK__Freelance__Skill__04AFB25B");
+                    .HasConstraintName("FK__Freelance__Skill__2F650636");
             });
 
             modelBuilder.Entity<Notification>(entity =>
@@ -227,11 +216,11 @@ namespace FreelancingTeamData.Data
                     .WithMany(p => p.Notifications)
                     .UsingEntity<Dictionary<string, object>>(
                         "AccountNotification",
-                        l => l.HasOne<Account>().WithMany().HasForeignKey("AccountId").HasConstraintName("FK__AccountNo__Accou__0A688BB1"),
-                        r => r.HasOne<Notification>().WithMany().HasForeignKey("NotificationId").HasConstraintName("FK__AccountNo__Notif__09746778"),
+                        l => l.HasOne<Account>().WithMany().HasForeignKey("AccountId").HasConstraintName("FK__AccountNo__Accou__351DDF8C"),
+                        r => r.HasOne<Notification>().WithMany().HasForeignKey("NotificationId").HasConstraintName("FK__AccountNo__Notif__3429BB53"),
                         j =>
                         {
-                            j.HasKey("NotificationId", "AccountId").HasName("PK__AccountN__5386F4486B6B6243");
+                            j.HasKey("NotificationId", "AccountId").HasName("PK__AccountN__5386F448F44F9DD2");
 
                             j.ToTable("AccountNotification");
                         });
@@ -240,11 +229,11 @@ namespace FreelancingTeamData.Data
                     .WithMany(p => p.Notifications)
                     .UsingEntity<Dictionary<string, object>>(
                         "TeamNotification",
-                        l => l.HasOne<Team>().WithMany().HasForeignKey("TeamId").HasConstraintName("FK__TeamNotif__TeamI__2610A626"),
-                        r => r.HasOne<Notification>().WithMany().HasForeignKey("NotificationId").HasConstraintName("FK__TeamNotif__Notif__251C81ED"),
+                        l => l.HasOne<Team>().WithMany().HasForeignKey("TeamId").HasConstraintName("FK__TeamNotif__TeamI__3DB3258D"),
+                        r => r.HasOne<Notification>().WithMany().HasForeignKey("NotificationId").HasConstraintName("FK__TeamNotif__Notif__3CBF0154"),
                         j =>
                         {
-                            j.HasKey("NotificationId", "TeamId").HasName("PK__TeamNoti__A1EC806BE7589E77");
+                            j.HasKey("NotificationId", "TeamId").HasName("PK__TeamNoti__A1EC806B0412EE6B");
 
                             j.ToTable("TeamNotification");
                         });
@@ -255,17 +244,17 @@ namespace FreelancingTeamData.Data
                 entity.HasOne(d => d.Freelancer)
                     .WithMany(p => p.Portoflios)
                     .HasForeignKey(d => d.FreelancerId)
-                    .HasConstraintName("FK__Portoflio__Freel__756D6ECB");
+                    .HasConstraintName("FK__Portoflio__Freel__2022C2A6");
 
                 entity.HasMany(d => d.Skills)
                     .WithMany(p => p.Portoflios)
                     .UsingEntity<Dictionary<string, object>>(
                         "PortoflioSkill",
-                        l => l.HasOne<Skill>().WithMany().HasForeignKey("SkillId").HasConstraintName("FK__Portoflio__Skill__7B264821"),
-                        r => r.HasOne<Portoflio>().WithMany().HasForeignKey("PortoflioId").HasConstraintName("FK__Portoflio__Porto__7A3223E8"),
+                        l => l.HasOne<Skill>().WithMany().HasForeignKey("SkillId").HasConstraintName("FK__Portoflio__Skill__25DB9BFC"),
+                        r => r.HasOne<Portoflio>().WithMany().HasForeignKey("PortoflioId").HasConstraintName("FK__Portoflio__Porto__24E777C3"),
                         j =>
                         {
-                            j.HasKey("PortoflioId", "SkillId").HasName("PK__Portofli__66C7E7F270BD223A");
+                            j.HasKey("PortoflioId", "SkillId").HasName("PK__Portofli__66C7E7F2748C93FA");
 
                             j.ToTable("PortoflioSkill");
                         });
@@ -277,17 +266,17 @@ namespace FreelancingTeamData.Data
                     .WithMany(p => p.Projects)
                     .HasForeignKey(d => d.ClientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Project__ClientI__3552E9B6");
+                    .HasConstraintName("FK__Project__ClientI__4460231C");
 
                 entity.HasMany(d => d.Skills)
                     .WithMany(p => p.Projects)
                     .UsingEntity<Dictionary<string, object>>(
                         "ProjectSkill",
-                        l => l.HasOne<Skill>().WithMany().HasForeignKey("SkillId").HasConstraintName("FK__ProjectSk__Skill__3DE82FB7"),
-                        r => r.HasOne<Project>().WithMany().HasForeignKey("ProjectId").HasConstraintName("FK__ProjectSk__Proje__3CF40B7E"),
+                        l => l.HasOne<Skill>().WithMany().HasForeignKey("SkillId").HasConstraintName("FK__ProjectSk__Skill__4CF5691D"),
+                        r => r.HasOne<Project>().WithMany().HasForeignKey("ProjectId").HasConstraintName("FK__ProjectSk__Proje__4C0144E4"),
                         j =>
                         {
-                            j.HasKey("ProjectId", "SkillId").HasName("PK__ProjectS__1BE0B7E8198B9A65");
+                            j.HasKey("ProjectId", "SkillId").HasName("PK__ProjectS__1BE0B7E830A87847");
 
                             j.ToTable("ProjectSkill");
                         });
@@ -296,25 +285,25 @@ namespace FreelancingTeamData.Data
             modelBuilder.Entity<ProjectPayment>(entity =>
             {
                 entity.HasKey(e => new { e.TransactionId, e.ClientId, e.ProjectId })
-                    .HasName("PK__ProjectP__FA52C177090056E2");
+                    .HasName("PK__ProjectP__FA52C177AB532527");
 
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.ProjectPayments)
                     .HasForeignKey(d => d.ClientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ProjectPa__Clien__59904A2C");
+                    .HasConstraintName("FK__ProjectPa__Clien__67A95F59");
 
                 entity.HasOne(d => d.Project)
                     .WithMany(p => p.ProjectPayments)
                     .HasForeignKey(d => d.ProjectId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ProjectPa__Proje__5A846E65");
+                    .HasConstraintName("FK__ProjectPa__Proje__689D8392");
 
                 entity.HasOne(d => d.Transaction)
                     .WithMany(p => p.ProjectPayments)
                     .HasForeignKey(d => d.TransactionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ProjectPa__Trans__589C25F3");
+                    .HasConstraintName("FK__ProjectPa__Trans__66B53B20");
             });
 
             modelBuilder.Entity<Proposal>(entity =>
@@ -323,37 +312,37 @@ namespace FreelancingTeamData.Data
                     .WithMany(p => p.Proposals)
                     .HasForeignKey(d => d.ProjectId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Proposal__Projec__53D770D6");
+                    .HasConstraintName("FK__Proposal__Projec__61F08603");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.Proposals)
                     .HasForeignKey(d => d.TeamId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Proposal__TeamId__52E34C9D");
+                    .HasConstraintName("FK__Proposal__TeamId__60FC61CA");
             });
 
             modelBuilder.Entity<Review>(entity =>
             {
                 entity.HasKey(e => new { e.ClientId, e.TeamId, e.ProjectId })
-                    .HasName("PK__Review__962BAEE3E5EB3931");
+                    .HasName("PK__Review__962BAEE3193D27B0");
 
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.Reviews)
                     .HasForeignKey(d => d.ClientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Review__ClientId__4A4E069C");
+                    .HasConstraintName("FK__Review__ClientId__54968AE5");
 
                 entity.HasOne(d => d.Project)
                     .WithMany(p => p.Reviews)
                     .HasForeignKey(d => d.ProjectId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Review__ProjectI__4C364F0E");
+                    .HasConstraintName("FK__Review__ProjectI__567ED357");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.Reviews)
                     .HasForeignKey(d => d.TeamId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Review__TeamId__4B422AD5");
+                    .HasConstraintName("FK__Review__TeamId__558AAF1E");
             });
 
             modelBuilder.Entity<Team>(entity =>
@@ -362,12 +351,12 @@ namespace FreelancingTeamData.Data
                     .WithMany(p => p.Teams)
                     .HasForeignKey(d => d.LeaderId)
                     .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK__Team__LeaderId__214BF109");
+                    .HasConstraintName("FK__Team__LeaderId__38EE7070");
 
                 entity.HasOne(d => d.Wallet)
                     .WithMany(p => p.Teams)
                     .HasForeignKey(d => d.WalletId)
-                    .HasConstraintName("FK__Team__WalletId__22401542");
+                    .HasConstraintName("FK__Team__WalletId__39E294A9");
             });
 
             modelBuilder.Entity<TeamFreelancerMessage>(entity =>
@@ -375,53 +364,53 @@ namespace FreelancingTeamData.Data
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.TeamFreelancerMessages)
                     .HasForeignKey(d => d.ClientId)
-                    .HasConstraintName("FK__TeamFreel__Clien__4F12BBB9");
+                    .HasConstraintName("FK__TeamFreel__Clien__595B4002");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.TeamFreelancerMessages)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__TeamFreel__TeamI__5006DFF2");
+                    .HasConstraintName("FK__TeamFreel__TeamI__5A4F643B");
             });
 
             modelBuilder.Entity<TeamMember>(entity =>
             {
                 entity.HasKey(e => new { e.TeamId, e.FreelancerId })
-                    .HasName("PK__TeamMemb__C1EAE9AF710A3332");
+                    .HasName("PK__TeamMemb__C1EAE9AFE99C2D7A");
 
                 entity.HasOne(d => d.Freelancer)
                     .WithMany(p => p.TeamMembers)
                     .HasForeignKey(d => d.FreelancerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TeamMembe__Freel__2DB1C7EE");
+                    .HasConstraintName("FK__TeamMembe__Freel__4183B671");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.TeamMembers)
                     .HasForeignKey(d => d.TeamId)
-                    .HasConstraintName("FK__TeamMembe__TeamI__2CBDA3B5");
+                    .HasConstraintName("FK__TeamMembe__TeamI__408F9238");
             });
 
             modelBuilder.Entity<TeamTransaction>(entity =>
             {
                 entity.HasKey(e => new { e.TeamId, e.FreelancerId, e.ProjectId })
-                    .HasName("PK__TeamTran__309CF3116E92BA18");
+                    .HasName("PK__TeamTran__309CF31166E82BA1");
 
                 entity.HasOne(d => d.Freelancer)
                     .WithMany(p => p.TeamTransactions)
                     .HasForeignKey(d => d.FreelancerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TeamTrans__Freel__39237A9A");
+                    .HasConstraintName("FK__TeamTrans__Freel__4830B400");
 
                 entity.HasOne(d => d.Project)
                     .WithMany(p => p.TeamTransactions)
                     .HasForeignKey(d => d.ProjectId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TeamTrans__Proje__3A179ED3");
+                    .HasConstraintName("FK__TeamTrans__Proje__4924D839");
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.TeamTransactions)
                     .HasForeignKey(d => d.TeamId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__TeamTrans__TeamI__382F5661");
+                    .HasConstraintName("FK__TeamTrans__TeamI__473C8FC7");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -431,51 +420,51 @@ namespace FreelancingTeamData.Data
                 entity.HasOne(d => d.AdminValidatedNavigation)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.AdminValidated)
-                    .HasConstraintName("FK__User__AdminValid__55009F39");
+                    .HasConstraintName("FK__User__AdminValid__056ECC6A");
 
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.User)
                     .HasForeignKey<User>(d => d.Id)
-                    .HasConstraintName("FK__User__Id__540C7B00");
+                    .HasConstraintName("FK__User__Id__047AA831");
 
                 entity.HasOne(d => d.Wallet)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.WalletId)
                     .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK__User__WalletId__55F4C372");
+                    .HasConstraintName("FK__User__WalletId__0662F0A3");
             });
 
             modelBuilder.Entity<UserCredit>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.CreditNumber })
-                    .HasName("PK__UserCred__3DBB4B31B52C3E45");
+                    .HasName("PK__UserCred__3DBB4B31B1931CD5");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserCredits)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__UserCredi__UserI__5BAD9CC8");
+                    .HasConstraintName("FK__UserCredi__UserI__0C1BC9F9");
             });
 
             modelBuilder.Entity<UserLanguage>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.Language })
-                    .HasName("PK__UserLang__1BB59569F2B9521D");
+                    .HasName("PK__UserLang__1BB59569686CFB1A");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserLanguages)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__UserLangu__UserI__58D1301D");
+                    .HasConstraintName("FK__UserLangu__UserI__093F5D4E");
             });
 
             modelBuilder.Entity<UserSocial>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.Type })
-                    .HasName("PK__UserSoci__A81346041E620401");
+                    .HasName("PK__UserSoci__A8134604CD1BFF8F");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserSocials)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__UserSocia__UserI__5E8A0973");
+                    .HasConstraintName("FK__UserSocia__UserI__0EF836A4");
             });
 
             modelBuilder.HasSequence<int>("SalesOrderNumber", "SalesLT");

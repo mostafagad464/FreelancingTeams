@@ -19,22 +19,7 @@ namespace FreelancingTeamData.Reopsitories
             db = _db;
         }
 
-        public Task<Project> CancelProject(Project _object)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Project> CheckProjectCompletion(Project _object)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Project> Deal(Project _oject)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Project> PostProject(Project _object)
+        public async Task<Project> Create(Project _object)
         {
             try
             {
@@ -45,6 +30,75 @@ namespace FreelancingTeamData.Reopsitories
                 return null;
 
             }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        Task<bool> ICRUD<Project>.Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public async Task<bool> Delete(int id)
+        {
+            // check for project id if using in another table 
+
+            try
+            {
+                Project p = new Project();
+                p.Id = id;
+                var project = db.Projects.Remove(p);
+                //p = db.Projects.Remove(p);
+                await db.SaveChangesAsync();
+                if (project != null)
+                    return true;
+                //if (p != null)
+                //    return p;
+                return false;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+        
+
+        public async Task<IEnumerable<Project>> GetAll()
+        {
+            try
+            {
+                return await db.Projects.ToListAsync();
+            }
+            catch(Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Project> GetById(int id)
+        {
+            try
+            {
+                //Project project = await db.Projects.FindAsync(id);
+                return await db.Projects.FindAsync(id);
+            }
+            catch(Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Project> Update(Project _object)
+        {
+            try
+            {
+                var project = db.Projects.Update(_object);
+                await db.SaveChangesAsync();
+                return project.Entity;
+            }
             catch(Exception)
             {
                 return null;
@@ -52,9 +106,25 @@ namespace FreelancingTeamData.Reopsitories
         }
 
 
-        public Task<Project> Review(Project _oject)
-        {
-            throw new NotImplementedException();
-        }
+
+        //public async Task<Project> PostProject(Project _object)
+        //{
+        //    try
+        //    {
+        //        var project = await db.Projects.AddAsync(_object);
+        //        await db.SaveChangesAsync();
+        //        if (project != null)
+        //            return project.Entity;
+        //        return null;
+
+        //    }
+        //    catch(Exception)
+        //    {
+        //        return null;
+        //    }
+        //}
+
+
+
     }
 }

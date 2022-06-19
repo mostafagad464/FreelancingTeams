@@ -10,9 +10,9 @@ public class ClientsController:ControllerBase
 {
     private readonly IClient<Client> _client;
     private readonly IProject<Project> _project;
-    private readonly ITransaction<Transaction> _transaction;
+    private readonly ITransaction<Transaction, ProjectPayment> _transaction;
 
-    public ClientsController(IClient<Client> client, IProject<Project> project, ITransaction<Transaction> transaction)
+    public ClientsController(IClient<Client> client, IProject<Project> project, ITransaction<Transaction, ProjectPayment> transaction)
     {
         _client = client;
         _project = project;
@@ -47,32 +47,32 @@ public class ClientsController:ControllerBase
     //    return BadRequest();
     //}
 
-    [HttpPost("createproject")]
-    public async Task<ActionResult<Project>> CreateProject(Project project)
-    {
-        if(project != null)
-        {
-            Project p = await _project.PostProject(project);
-            if (p != null)
-                return Ok(p);
-        }
-        return BadRequest();
-    }
+    //[HttpPost("createproject")]
+    //public async Task<ActionResult<Project>> CreateProject(Project project)
+    //{
+    //    if(project != null)
+    //    {
+    //        //Project p = await _project.PostProject(project);
+    //        //if (p != null)
+    //        //    return Ok(p);
+    //    }
+    //    return BadRequest();
+    //}
 
-    [HttpPost("Pay")]
-    public async Task<ActionResult<Transaction>> PayForProject(Transaction _object, int clientId, int projectId)
-    //public async Task<ActionResult<int>> PayForProject(Transaction _object, int clientId, int projectId)
-    {
-        if (_object != null)
-        {
-            Transaction transaction = await _transaction.ProjectPayment(_object, clientId, projectId);
-            if (transaction != null)
-                // The problem in returned object.
-                return Ok(transaction);
-            return BadRequest();
-        }
-        return NotFound();
-    }
+    //[HttpPost("Pay")]
+    //public async Task<ActionResult<Transaction>> PayForProject(Transaction _object, int clientId, int projectId)
+    ////public async Task<ActionResult<int>> PayForProject(Transaction _object, int clientId, int projectId)
+    //{
+    //    if (_object != null)
+    //    {
+    //        Transaction transaction = await _transaction.ProjectPayment(_object, clientId, projectId);
+    //        if (transaction != null)
+    //            // The problem in returned object.
+    //            return Ok(transaction);
+    //        return BadRequest();
+    //    }
+    //    return NotFound();
+    //}
 
 
 }
