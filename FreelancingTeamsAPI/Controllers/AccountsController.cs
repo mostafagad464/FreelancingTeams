@@ -16,71 +16,109 @@ namespace FreelancingTeamsAPI.Controllers
     public class AccountsController : ControllerBase
     {
 
-        //private readonly FreeLanceProjectContext _context;
-        private readonly ICRUD<Account> crud;
         private readonly IAccount<Account> account;
 
-        public AccountsController(ICRUD<Account> _crud, IAccount<Account> _account)
+        public AccountsController( IAccount<Account> _account)
         {
-            crud = _crud;
             account = _account;
         }
 
-        // GET: api/UserAccounts
+        // GET: api/Accounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> GetUserAccounts()
+        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
         {
-            //var obj = await crud.GetAll();
-            var obj = await crud.GetAll();
+            var obj = await account.GetAll();
             if (obj != null)
-            //if (_context.UserAccounts == null)
             {
-                //return NotFound();
+                foreach (var account in obj)
+                {
+                    account.Password = null;
+                }
                 return Ok(obj);
             }
             return NotFound();
         }
-        
-        // GET: api/UserAccounts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetUserAccount(int id)
+        // GET: api/Accounts/Admins
+        [HttpGet("Admins")]
+        public async Task<ActionResult<IEnumerable<Account>>> GetAdmins()
         {
-
-            //if (_context.UserAccounts == null)
-            //{
-            //    return NotFound();
-            //}
-            if (id!=0)
+            var obj = await account.GetAdmins();
+            if (obj != null)
             {
-                var obj = await crud.GetById(id);
-                if(obj!=null)
+                foreach (var admin in obj)
                 {
+                    admin.Password = null;
+                }
+                return Ok(obj);
+            }
+            return NotFound();
+        }
+
+        // GET: api/Accounts/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Account>> GetAccount(int id)
+        {
+            var obj = await account.GetById(id);
+            if (obj != null)
+            {
+                obj.Password = null;
+                return Ok(obj);
+            }
+            return NotFound();
+        }
+        // POST: api/Accounts
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Account>> PostAccount(Account Account)
+        {
+            if (Account != null)
+            {
+                var obj = await account.Create(Account);
+                if (obj != null)
+                {
+                    //string url = HttpContext.Request.Path.Value;
+                    //return Created(url, obj);
+                    if (obj.Id == 0)
+                    {
+                        return Conflict();
+                    }
+                    obj.Password = null;
+                    return CreatedAtAction("GetAccount", new { id = obj.Id }, obj);
+                }
+                return Problem("Entity set 'FreelancingTeamsContext.Account'  is null.");
+            }
+            return BadRequest();
+        }
+
+        // PUT: api/Accounts/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut]
+        public async Task<IActionResult> PutAccount(Account Account)
+        {
+            if (Account != null)
+            {
+                var obj = await account.Update(Account);
+                if (obj != null)
+                {
+                    obj.Password = null;
                     return Ok(obj);
                 }
                 return NotFound();
             }
             return BadRequest();
-            //var userAccount = await _context.UserAccounts.FindAsync(id);
-
-            //if (userAccount == null)
-            //{
-            //    return NotFound();
-            //}
-            //return userAccount;
         }
 
-        // PUT: api/UserAccounts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserAccount(int id, Account userAccount)
-        {
 
-            if (id != 0 && userAccount != null)
+        // DELETE: api/Accounts/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteAccount(int id)
+        {
+            if (id != 0)
             {
-                var obj = await crud.Update(id, userAccount);
-                if (obj != null)
+                var deleted = await account.Delete(id);
+                if (deleted)
                 {
-                    return Ok(obj);
+                    return NoContent();
                 }
                 else
                 {
@@ -88,103 +126,6 @@ namespace FreelancingTeamsAPI.Controllers
                 }
             }
             return BadRequest();
-
-            //if (id != userAccount.Id)
-            //{
-            //    return BadRequest();
-            //}
-
-            ////_context.Entry(userAccount).State = EntityState.Modified;
-
-            //try
-            //{
-            //    var obj = await crud.Update(id, userAccount);
-            //    //await _context.SaveChangesAsync();
-            //    if (obj != null)
-            //    {
-            //        return Ok(obj);
-            //    }
-            //    else NotFound();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    //if (!UserAccountExists(id))
-            //    //{
-            //        return BadRequest();
-            //    //}
-            //    //else
-            //    //{
-            //    //    throw;
-            //    //}
-            //}
-
         }
-
-        // POST: api/UserAccounts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("registration")]
-        public async Task<ActionResult<Account>> PostUserAccount(Account Account)
-        {
-            if (Account != null)
-            {
-                var obj = await crud.Create(Account);
-                if (obj != null)
-                {
-                    string url = HttpContext.Request.Path.Value;
-                    return Created(url, obj);
-                }
-            }
-            return Problem("Entity set 'FreeLanceProjectContext.Account'  is null.");
-
-            //_context.UserAccounts.Add(userAccount);
-            //await _context.SaveChangesAsync();
-
-            //return CreatedAtAction("GetUserAccount", new { id = userAccount.Id }, userAccount);
-        }
-
-        // DELETE: api/UserAccounts/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUserAccount(int id)
-        {
-            if (id != 0)
-            {
-                //return NotFound();
-
-                var userAccount = await crud.Delete(id);
-                if (userAccount != null)
-                {
-                    return Ok(userAccount);
-                }
-                else
-                {
-                    return NoContent();
-
-                }
-                //_context.UserAccounts.Remove(userAccount);
-                //await _context.SaveChangesAsync();
-
-            }
-            return BadRequest();
-        }
-
-        //private bool UserAccountExists(int id)
-        //{
-        //    return (_context.UserAccounts?.Any(e => e.Id == id)).GetValueOrDefault();
-        //}
-        [HttpPost("login")]
-        public async Task<ActionResult<Account>> Login(string email, string password)
-        {
-            if (email != null && password != null)
-            {
-                var obj = await  account.Login(email, password);
-                if (obj != null)
-                    return Ok(obj);
-                return NotFound();
-            }            
-            return BadRequest();
-        }
-
-        
-        
     }
 }

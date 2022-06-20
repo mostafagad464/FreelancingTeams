@@ -9,10 +9,10 @@ using FreelancingTeamData.Data;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IUser<T>:IAccount<T>
+    public interface IUser<T> : ICRUD<T>
     {
-
-        public abstract Task<T> CompleteProfile(T _object);
+        public abstract Task<IEnumerable<T>> GetFreelancers();
+        public abstract Task<IEnumerable<T>> GetClients();
 
     }
 }

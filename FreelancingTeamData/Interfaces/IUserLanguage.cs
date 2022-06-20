@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface ICRUD <T>
+    public interface IUserLanguage<T>
     {
         public Task<T> Create(T _object);
 
-        public Task<T> Update(T _object);
-
-        public Task<bool> Delete(int id);
-
         public Task<IEnumerable<T>> GetAll();
 
-        public Task<T> GetById(int id);
+        public Task<bool> Delete(int userId, string language);
+
+        public Task<T> GetById(int userId, string language);
+
     }
 }

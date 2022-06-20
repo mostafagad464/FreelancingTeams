@@ -10,9 +10,9 @@ using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 namespace FreelancingTeamData.Models
 {
     [Table("Account")]
-    [Index("IdentityId", Name = "UQ__Account__30667A44620809BC", IsUnique = true)]
-    [Index("Username", Name = "UQ__Account__536C85E439D3FF98", IsUnique = true)]
-    [Index("Email", Name = "UQ__Account__A9D10534F70C4439", IsUnique = true)]
+    [Index("IdentityId", Name = "UQ_Account_30667A44620809BC", IsUnique = true)]
+    [Index("Username", Name = "UQ_Account_536C85E439D3FF98", IsUnique = true)]
+    [Index("Email", Name = "UQ_Account_A9D10534F70C4439", IsUnique = true)]
     public partial class Account
     {
         public Account()
@@ -24,7 +24,7 @@ namespace FreelancingTeamData.Models
 
         [Key]
         public int Id { get; set; }
-        public int? IdentityId { get; set; }
+        public string? IdentityId { get; set; }
         [StringLength(50)]
         [Unicode(false)]
         public string Email { get; set; }

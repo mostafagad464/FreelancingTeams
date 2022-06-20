@@ -10,7 +10,7 @@ namespace FreelancingTeamData.Interfaces
     {
         public Task<T> ChooseTeam(int TeamId);
         
-        public Task<T> PostProject(T _object, IEnumerable<T> _objects);
+        //public Task<T> PostProject(T _object);
         
         public Task<IEnumerable<T>> SearchForTeamBySkills(IEnumerable<T> _objects);
 

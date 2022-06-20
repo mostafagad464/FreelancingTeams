@@ -27,5 +27,6 @@ namespace FreelancingTeamData.Models
 
         [InverseProperty("Transaction")]
         public virtual ICollection<ProjectPayment> ProjectPayments { get; set; }
+
     }
 }
