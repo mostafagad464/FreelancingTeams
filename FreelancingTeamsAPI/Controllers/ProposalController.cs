@@ -80,7 +80,7 @@ namespace FreelancingTeamsAPI.Controllers
             }
             try
             {
-                var returned = await prop.Update(id ,p);
+                var returned = await prop.Update(p);
             }
             catch (DbUpdateConcurrencyException)
             {

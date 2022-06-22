@@ -28,18 +28,18 @@ namespace FreelancingTeamData.Reopsitories
             return _object;
         }
 
-        public async Task<Proposal> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var propos = await db.Proposals.FindAsync(id);
             if (propos == null)
             {
-                return propos;
+                return false;
             }
 
             db.Proposals.Remove(propos);
             await db.SaveChangesAsync();
 
-            return propos;
+            return true;
         }
 
         public async Task<IEnumerable<Proposal>> GetAll()
@@ -54,7 +54,7 @@ namespace FreelancingTeamData.Reopsitories
             return propos;
         }
 
-        public async Task<Proposal> Update(int id, Proposal _object)
+        public async Task<Proposal> Update(Proposal _object)
         {
             db.Entry(_object).State = EntityState.Modified;
             await db.SaveChangesAsync();
