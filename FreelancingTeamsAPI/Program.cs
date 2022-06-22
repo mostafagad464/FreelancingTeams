@@ -27,6 +27,10 @@ builder.Services.AddDbContext<FreeLanceProjectContext>(option =>
 
 
 // Dependancy Injection
+//builder.Services.AddScoped<ICRUD<Account>, AccountRepository>();
+//builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
+builder.Services.AddScoped<IDeal<Deal>, DealRepository>();
+builder.Services.AddScoped<IProposal<Proposal>, ProposalRepository>();
 builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
 builder.Services.AddScoped<IUser<User>, UserRepository>();
 builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
