@@ -99,6 +99,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(s);
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
