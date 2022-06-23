@@ -162,7 +162,7 @@ namespace FreelancingTeamData.Reopsitories
         {
             try
             {
-                var obj = await db.Accounts.Where(e => (e.Email == usernameORemail || e.Username == usernameORemail) && e.Password == password).FirstOrDefaultAsync();
+                var obj = await db.Accounts.Where(e => (e.Email == usernameORemail || e.Username == usernameORemail) && e.Password == password).Include(a => a.User).FirstOrDefaultAsync();
                 return obj;
             }
             catch (Exception)

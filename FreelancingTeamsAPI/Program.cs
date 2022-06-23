@@ -51,7 +51,7 @@ builder.Services.AddCors(opstion =>
             builder.AllowAnyOrigin();
             builder.AllowAnyMethod();
             builder.AllowAnyHeader();
-        });
+        }) ;
 });
 
 //JWT 
@@ -79,6 +79,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(s);
 
 app.UseAuthentication();
 app.UseAuthorization();
