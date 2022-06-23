@@ -7,6 +7,7 @@ using FreelancingTeamData.Data;
 using FreelancingTeamData.Interfaces;
 using FreelancingTeamData.Reopsitories;
 using FreelancingTeamData.Models;
+using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -26,17 +27,37 @@ builder.Services.AddDbContext<FreeLanceProjectContext>(option =>
 
 
 // Dependancy Injection
-//builder.Services.AddScoped<ICRUD<Account>, AccountRepository>();
+
+builder.Services.AddScoped<IDeal<Deal>, DealRepository>();
+builder.Services.AddScoped<IProposal<Proposal>, ProposalRepository>();
 builder.Services.AddScoped<IAccount<Account>, AccountRepository>();
 builder.Services.AddScoped<IUser<User>, UserRepository>();
 builder.Services.AddScoped<IProject<Project>, ProjectRepository>();
-builder.Services.AddScoped<ITransaction<Transaction>, TransactionRepository>();
+builder.Services.AddScoped<ITeam<Team>, TeamRepository>();
+builder.Services.AddScoped<IPortoflio<Portoflio>, PortoflioRepository>();
+builder.Services.AddScoped<IWallet<Wallet>, WalletRepository>();
+builder.Services.AddScoped<IComplain<Complain>, ComplainRepository>();
+builder.Services.AddScoped<IExperience<FreelancerExperience>, FreelancerExperienceRepository>();
+builder.Services.AddScoped<IEducationSkill<FreelancerEducation>, FreelancerEducationRepository>();
+builder.Services.AddScoped<IEducationSkill<FreelancerSkill>, FreelancerSkillRepository>();
+builder.Services.AddScoped<ICertificate<FreelancerCertificate>, FreelancerCertificateRepository>();
+builder.Services.AddScoped<ICategory<Category>, CategoryRepository>();
+builder.Services.AddScoped<ISkill<Skill>, SkillRepository>();
+builder.Services.AddScoped<IUserCredit<UserCredit>, UserCreditRepository>();
+builder.Services.AddScoped<IUserLanguage<UserLanguage>, UserLanguageRepository>();
+builder.Services.AddScoped<IUserSocial<UserSocial>, UserSocialRepository>();
+builder.Services.AddScoped<ITransaction<Transaction, ProjectPayment>, TransactionRepository>();
+builder.Services.AddScoped<ITeamTransactions<TeamTransaction>, TeamTransactionRepository>();
 builder.Services.AddScoped<IReview<Review>, ReviewRepository>();
 
 
 
 
 builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -77,6 +98,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(s);
 
 app.UseHttpsRedirection();
 
