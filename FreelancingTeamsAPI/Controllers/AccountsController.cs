@@ -66,6 +66,20 @@ namespace FreelancingTeamsAPI.Controllers
             }
             return NotFound();
         }
+
+        // GET: api/Accounts/5
+        [HttpGet("UserName")]
+        public async Task<ActionResult<Account>> GetAccount(string First_Name, string Last_Name)
+        {
+            if(!String.IsNullOrEmpty(First_Name) && !String.IsNullOrEmpty(Last_Name))
+            {
+                string UserNmae = await account.UniqueUserName(First_Name,Last_Name);
+                return Ok(UserNmae);
+
+            }
+            return BadRequest();
+        }
+
         // POST: api/Accounts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

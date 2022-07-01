@@ -131,6 +131,21 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
+        public virtual async Task<string> UniqueUserName(string FirstName, string LastName)
+        {
+            string UserName;
+            Account account;
+            int? i = null;
+            do
+            {
+                UserName = FirstName.ToLower() + LastName.ToLower() + i.ToString(); ;
+                account = await db.Accounts.Where(a => a.Username == UserName).FirstOrDefaultAsync();
+                i = (i == null) ? 1 : i + 1;
+            } while (account!=null);
+
+            return UserName;
+        }
+
         public virtual async Task<Account> Update(Account account)
         {
             try
