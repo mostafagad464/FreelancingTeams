@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IAccount<T>:ICRUD<T>
+    public interface IPortoflio<T> : ICRUD<T>
     {
-        public Task<T> Login(string mail, string password);
-        public Task<IEnumerable<T>> GetAdmins();
-
     }
 }
