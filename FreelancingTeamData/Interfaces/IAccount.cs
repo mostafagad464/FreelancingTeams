@@ -11,6 +11,7 @@ namespace FreelancingTeamData.Interfaces
         public Task<T> Login(string mail, string password);
         public Task<IEnumerable<T>> GetAdmins();
         public Task<string> UniqueUserName(string FirstName, string LastName);
+        public Task<T> Logout(int id);
 
     }
 }

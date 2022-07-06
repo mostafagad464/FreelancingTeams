@@ -51,6 +51,19 @@ namespace FreelancingTeamsAPI.Controllers
                 return BadRequest();
             }
         }
+        [HttpPost("/api/Logout")]
+        public async Task<IActionResult> Logout(int Id)
+        {
+            if (Id != 0 )
+            {
+                await account.Logout(Id);
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
     public class usr
     {

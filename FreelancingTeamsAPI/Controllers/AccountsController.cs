@@ -38,6 +38,20 @@ namespace FreelancingTeamsAPI.Controllers
             }
             return NotFound();
         }
+
+        // GET: api/Accounts/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Account>> GetAccount(int id)
+        {
+            var obj = await account.GetById(id);
+            if (obj != null)
+            {
+                obj.Password = null;
+                return Ok(obj);
+            }
+            return NotFound();
+        }
+
         // GET: api/Accounts/Admins
         [HttpGet("Admins")]
         public async Task<ActionResult<IEnumerable<Account>>> GetAdmins()
@@ -54,27 +68,14 @@ namespace FreelancingTeamsAPI.Controllers
             return NotFound();
         }
 
-        // GET: api/Accounts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccount(int id)
-        {
-            var obj = await account.GetById(id);
-            if (obj != null)
-            {
-                obj.Password = null;
-                return Ok(obj);
-            }
-            return NotFound();
-        }
-
-        // GET: api/Accounts/5
+        // GET: api/Accounts/UserName
         [HttpGet("UserName")]
-        public async Task<ActionResult<Account>> GetAccount(string First_Name, string Last_Name)
+        public async Task<ActionResult<Account>> GetUserName(string First_Name, string Last_Name)
         {
             if(!String.IsNullOrEmpty(First_Name) && !String.IsNullOrEmpty(Last_Name))
             {
-                string UserNmae = await account.UniqueUserName(First_Name,Last_Name);
-                return Ok(UserNmae);
+                string UserName = await account.UniqueUserName(First_Name,Last_Name);
+                return Ok(new { UserName = UserName });
 
             }
             return BadRequest();
