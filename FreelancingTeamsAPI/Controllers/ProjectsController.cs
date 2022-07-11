@@ -20,16 +20,24 @@ namespace FreelancingTeamsAPI.Controllers
         }
         // GET: api/<ProjectsController>
         [HttpGet]
-        public async Task<IEnumerable<Project>> Get()
+        public async Task<ActionResult< IEnumerable<Project>>> Get()
         {
-            try
+            IEnumerable<Project> project = await _project.GetAll();
+
+            if (project == null)
             {
-                return await _project.GetAll();
+                return BadRequest();
+
             }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return Ok(project);
+            //try
+            //{
+            //    return await _project.GetAll();
+            //}
+            //catch (Exception ex)
+            //{
+            //    return null;
+            //}
         }
 
         // GET api/<ProjectsController>/5

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreelancingTeamData.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace FreelancingTeamData.Interfaces
         public Task<IEnumerable<T>> GetAll();
 
         public Task<T> GetById(int id);
+
+        public Task<T> AddTeamMember(TeamMember teamMember);
 
         //public Task<T> SubmitProject(T _object);
         //public Task<T> SerchForProject(IEnumerable<T> _objects);

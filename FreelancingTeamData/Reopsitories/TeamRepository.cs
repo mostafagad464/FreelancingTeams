@@ -48,7 +48,7 @@ namespace FreelancingTeamData.Reopsitories
 
             db.Teams.Remove(team);
             await db.SaveChangesAsync();
-            
+
 
             return true;
         }
@@ -70,7 +70,7 @@ namespace FreelancingTeamData.Reopsitories
         {
             try
             {
-                return await db.Teams.FindAsync(id);
+                return await db.Teams.Include(t => t.TeamMembers).Include(t => t.Deals).FirstOrDefaultAsync(a => a.Id == id);
             }
             catch
             {
@@ -134,12 +134,30 @@ namespace FreelancingTeamData.Reopsitories
 
 
                 await db.SaveChangesAsync();
-                return await db.Teams.FindAsync(_object.Id);
+                return await db.Teams.Include(t => t.TeamMembers).FirstOrDefaultAsync(a => a.Id == _object.Id);
             }
             catch
             {
                 return null;
             }
         }
+        public async Task<Team> AddTeamMember(TeamMember teamMember)
+        {
+            try
+            {
+                await db.TeamMembers.AddAsync(teamMember);
+                await db.SaveChangesAsync();
+
+                return await db.Teams.Include(t => t.TeamMembers).ThenInclude(m => m.Freelancer).FirstOrDefaultAsync(a => a.Id == teamMember.TeamId);
+
+            }
+            catch (Exception ex)
+            {
+                return new Team() { Description = ex.Message };
+            }
+
+        }
+
+
     }
 }
