@@ -1,6 +1,7 @@
 ﻿using FreelancingTeamData.Data;
 using FreelancingTeamData.Interfaces;
 using FreelancingTeamData.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,11 @@ namespace FreelancingTeamData.Reopsitories
             throw new NotImplementedException();
         }
 
+        public Task<byte[]> GetImage(int UserId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Client> PayPayment(string _object)
         {
             throw new NotImplementedException();
@@ -77,6 +83,11 @@ namespace FreelancingTeamData.Reopsitories
         }
 
         public Task<IEnumerable<Client>> SearchForTeamBySkills(IEnumerable<Client> _objects)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<byte[]> SetImage(int UserId, IFormFile image)
         {
             throw new NotImplementedException();
         }

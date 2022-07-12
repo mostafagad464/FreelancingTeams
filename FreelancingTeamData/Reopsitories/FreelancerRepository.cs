@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace FreelancingTeamData.Reopsitories
 {
@@ -90,6 +91,16 @@ namespace FreelancingTeamData.Reopsitories
         }
 
         public Task<IEnumerable<Freelancer>> GetFreelancers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<byte[]> GetImage(int UserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<byte[]> SetImage(int UserId, IFormFile image)
         {
             throw new NotImplementedException();
         }
