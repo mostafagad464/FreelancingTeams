@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface ITeam<T> : ICRUD<T>
+    public interface ITeam<T> : ICRUD<T>, IImage
     {
 
         public Task<T> Create(T _object);
