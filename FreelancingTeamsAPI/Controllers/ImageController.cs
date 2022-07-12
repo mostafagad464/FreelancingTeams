@@ -40,6 +40,10 @@ namespace FreelancingTeamsAPI.Controllers
         public async Task<IActionResult> Get(int UserId)
         {
             var image = await user.GetImage(UserId);
+            if(image == null)
+            {
+                return NotFound();
+            }
             return File(image, "image/jpg");
         }
     }

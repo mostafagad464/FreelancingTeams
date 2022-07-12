@@ -24,9 +24,17 @@ namespace FreelancingTeamData.Reopsitories
             {
                 return null;
             }
-            db.Users.Add(user);
             try
             {
+                await db.Users.AddAsync(user);
+                if (user.Freelancer == true && user.FreelancerNavigation == null)
+                {
+                    await db.Freelancers.AddAsync(new Freelancer() { Id = user.Id });
+                }
+                else if(user.Client == true && user.ClientNavigation == null)
+                {
+                    await db.Clients.AddAsync(new Client() { Id = user.Id });
+                }
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateException)

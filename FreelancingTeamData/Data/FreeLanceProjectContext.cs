@@ -52,6 +52,7 @@ namespace FreelancingTeamData.Data
         public virtual DbSet<TeamTransaction> TeamTransactions { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserConnection> UserConnections { get; set; }
         public virtual DbSet<UserCredit> UserCredits { get; set; }
         public virtual DbSet<UserLanguage> UserLanguages { get; set; }
         public virtual DbSet<UserSocial> UserSocials { get; set; }
@@ -361,15 +362,15 @@ namespace FreelancingTeamData.Data
 
             modelBuilder.Entity<TeamFreelancerMessage>(entity =>
             {
-                entity.HasOne(d => d.Client)
-                    .WithMany(p => p.TeamFreelancerMessages)
-                    .HasForeignKey(d => d.ClientId)
-                    .HasConstraintName("FK__TeamFreel__Clien__595B4002");
-
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.TeamFreelancerMessages)
                     .HasForeignKey(d => d.TeamId)
                     .HasConstraintName("FK__TeamFreel__TeamI__5A4F643B");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TeamFreelancerMessages)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_TeamFreelancerMessages_User");
             });
 
             modelBuilder.Entity<TeamMember>(entity =>
@@ -432,6 +433,17 @@ namespace FreelancingTeamData.Data
                     .HasForeignKey(d => d.WalletId)
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK__User__WalletId__0662F0A3");
+            });
+
+            modelBuilder.Entity<UserConnection>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.ConnectionId });
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserConnections)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserConnection_Account");
             });
 
             modelBuilder.Entity<UserCredit>(entity =>

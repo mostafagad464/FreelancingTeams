@@ -16,10 +16,12 @@ namespace FreelancingTeamsAPI.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly ITeam<Team> TeamRepository;
+        FreeLanceProjectContext _context;
 
-        public TeamsController(ITeam<Team> _TeamRepository)
+        public TeamsController(ITeam<Team> _TeamRepository, FreeLanceProjectContext context)
         {
             TeamRepository = _TeamRepository;
+            _context = context; 
         }
 
         // GET: api/Teams
@@ -59,6 +61,18 @@ namespace FreelancingTeamsAPI.Controllers
                 return BadRequest();
             else
                 return Ok(EditedTeam);
+        }
+
+        //PUT: api/Teams/TeamMember
+        [HttpPost("TeamMember")]
+        public async Task<IActionResult> PostTeamMember(TeamMember teamMember)
+        {
+            var EditedTeam = await TeamRepository.AddTeamMember(teamMember);
+            if (EditedTeam == null)
+            {
+                return BadRequest();
+            }
+            return Ok(EditedTeam);
         }
 
         //POST: api/Teams

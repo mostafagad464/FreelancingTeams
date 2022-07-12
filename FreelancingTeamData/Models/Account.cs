@@ -18,6 +18,7 @@ namespace FreelancingTeamData.Models
         {
             AccountMessageRecievers = new HashSet<AccountMessage>();
             AccountMessageSenders = new HashSet<AccountMessage>();
+            UserConnections = new HashSet<UserConnection>();
             Notifications = new HashSet<Notification>();
         }
 
@@ -50,6 +51,8 @@ namespace FreelancingTeamData.Models
         public virtual ICollection<AccountMessage> AccountMessageRecievers { get; set; }
         [InverseProperty("Sender")]
         public virtual ICollection<AccountMessage> AccountMessageSenders { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<UserConnection> UserConnections { get; set; }
 
         [ForeignKey("AccountId")]
         [InverseProperty("Accounts")]

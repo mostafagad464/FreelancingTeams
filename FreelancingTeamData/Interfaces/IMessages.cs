@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace FreelancingTeamData.Interfaces
 {
-    internal interface IMessages<T>
+    public interface IMessages<T>
     {
-        public Task<T> SendMessage(Task _object);
-        public IEnumerable<Task<T>> GetAllmessages(int SnderId, int ReceiverId);
+        public Task<IEnumerable<T>> GetChat(int SnderId, int ReceiverId);
+        public Task<IEnumerable<T>> GetAllChats(int UserId, string? type);
+        public Task<T> SendMessage(T _object);
         
         // Handle This method
-        public Task<T> DeleteMessage(int SnderId, int ReceiverId, int MessageID);
-        public Task<T> DeleteChat(int SnderId, int ReceiverId);
+        //public Task<T> DeleteMessage(int SenderId, int ReceiverId, int MessageID);
+        //public Task<T> DeleteChat(int SnderId, int ReceiverId);
 
     }
 }
