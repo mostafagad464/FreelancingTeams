@@ -22,5 +22,10 @@ namespace FreelancingTeamData.Models
         [ForeignKey("TeamId")]
         [InverseProperty("TeamMembers")]
         public virtual Team Team { get; set; }
+
+        public static implicit operator List<object>(TeamMember v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
