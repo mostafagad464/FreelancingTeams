@@ -85,6 +85,11 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
+        public Task<IEnumerable<FreelancerEducation>> GetSkillCategoryNamesById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual async Task<FreelancerEducation> Update(int freelancerId, int id, FreelancerEducation _object)
         {
             try

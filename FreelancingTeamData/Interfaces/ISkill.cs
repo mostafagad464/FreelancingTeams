@@ -9,5 +9,6 @@ namespace FreelancingTeamData.Interfaces
     public interface ISkill<T> : ICRUD<T>
     {
 
+
     }
 }

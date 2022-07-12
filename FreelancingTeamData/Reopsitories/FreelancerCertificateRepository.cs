@@ -53,7 +53,7 @@ namespace FreelancingTeamData.Reopsitories
             {
                 return null;
             }
-            
+
         }
 
         public virtual async Task<IEnumerable<FreelancerCertificate>> GetAll()
@@ -78,11 +78,11 @@ namespace FreelancingTeamData.Reopsitories
                     return obj;
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return null;
-            }     
-            return null;             
+            }
+            return null;
         }
 
         public virtual async Task<FreelancerCertificate> Update(int freelancerId, string title, FreelancerCertificate _object)
@@ -109,7 +109,25 @@ namespace FreelancingTeamData.Reopsitories
             {
                 return null;
             }
-            
+
+        }
+
+        public virtual async Task<IEnumerable<FreelancerCertificate>> GetAllFreelancerCertificates(int Id)
+        {
+            try
+            {
+                var obj = await _db.FreelancerCertificates.Where(a => a.FreelancerId == Id).ToListAsync();
+                if (obj != null)
+                {
+                    return obj;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return null;
+
         }
     }
 }

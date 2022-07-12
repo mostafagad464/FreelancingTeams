@@ -83,7 +83,7 @@ namespace FreelancingTeamData.Reopsitories
             try
             {
                 //Project project = await db.Projects.FindAsync(id);
-                return await db.Projects.FindAsync(id);
+                return await db.Projects.Include(p => p.Reviews).FirstOrDefaultAsync(a => a.Id == id);
             }
             catch(Exception)
             {
