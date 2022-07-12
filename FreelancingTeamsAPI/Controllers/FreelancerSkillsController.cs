@@ -108,6 +108,26 @@ namespace FreelancingTeamsAPI.Controllers
 
             return NoContent();
         }
+        [HttpGet("GetFreelancerSkills/{id}")]
+        public async Task<ActionResult<IEnumerable<FreelancerSkill>>> GetFreelancerSkillsCategoriesById(int id)
+        {
+            try
+            {
+                var obj = await _skill.GetSkillCategoryNamesById(id);
+
+                if (obj != null)
+                {
+                    return Ok(obj);
+                }
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+
+        }
 
         //private bool FreelancerSkillExists(int id)
         //{

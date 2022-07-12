@@ -59,11 +59,11 @@ namespace FreelancingTeamsAPI.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFreelancerExperience(int id, DateTime startDate,FreelancerExperience freelancerExperience)
+        public async Task<IActionResult> PutFreelancerExperience(int id, FreelancerExperience freelancerExperience)
         {
-            if(id == freelancerExperience.FreelancerId && startDate == freelancerExperience.StartDate)
+            if(id == freelancerExperience.FreelancerId )
             {
-                var obj = await _experience.Update(id, startDate, freelancerExperience);
+                var obj = await _experience.Update(id,freelancerExperience.StartDate, freelancerExperience);
                 if(obj != null)
                 {
                     return Ok(obj);
@@ -104,6 +104,26 @@ namespace FreelancingTeamsAPI.Controllers
                 }
             }
             return BadRequest();
-        }      
+        }
+
+        [HttpGet("GetFreelancerExperiences/{id}")]
+        public async Task<IActionResult> GetAllFreelancerExperiences(int id)
+        {
+            try
+            {
+                var obj = await _experience.GetAllFreelancerExperiences(id);
+
+                if (obj != null)
+                {
+                    return Ok(obj);
+                }
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+        }
     }
 }
