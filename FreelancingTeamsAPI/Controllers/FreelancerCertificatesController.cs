@@ -61,11 +61,11 @@ namespace FreelancingTeamsAPI.Controllers
         // PUT: api/FreelancerCertificates/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFreelancerCertificate(int id, string title , FreelancerCertificate freelancerCertificate)
+        public async Task<IActionResult> PutFreelancerCertificate(int id,  FreelancerCertificate freelancerCertificate)
         {
-            if (id == freelancerCertificate.FreelancerId && title == freelancerCertificate.Title)
+            if (id == freelancerCertificate.FreelancerId )
             {
-                var obj = await _certificate.Update(id, title, freelancerCertificate);
+                var obj = await _certificate.Update(id, freelancerCertificate.Title, freelancerCertificate);
                 if (obj != null)
                 {
                     return Ok(obj);
@@ -107,6 +107,26 @@ namespace FreelancingTeamsAPI.Controllers
                 }
             }
             return BadRequest();
+        }
+        [HttpGet("GetFreelancerCertificates/{id}")]
+        public async Task<ActionResult<IEnumerable<FreelancerCertificate>>> GetAllFreelancerCertificatesByFreelancerId(int id)
+        {
+            try
+            {
+                var obj = await _certificate.GetAllFreelancerCertificates(id);
+
+                if (obj != null)
+                {
+                    return Ok(obj);
+                }
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+
         }
 
         //private bool FreelancerCertificateExists(int id)

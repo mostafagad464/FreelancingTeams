@@ -79,6 +79,25 @@ namespace FreelancingTeamsAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> getProjectDeal(int id, int teamId, int projectId)
+        {
+            if (id == null || teamId == null || projectId == null)
+            {
+                return BadRequest();
+            }
+
+            var returnedDeal = await deal.GetDeal(id, teamId, projectId);
+
+            if (returnedDeal != null)
+                return Ok(returnedDeal);
+
+            //db.Entry(returnedDeal).State = EntityState.Modified;
+
+            return NoContent();
+        }
+
         [HttpPut("{clientId}/{teamId}/{projectId}")]
         public async Task<IActionResult> putDeal(int clientId, int teamId, int projectId , Deal d)
         {

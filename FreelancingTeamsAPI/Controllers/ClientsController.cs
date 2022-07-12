@@ -12,11 +12,29 @@ public class ClientsController:ControllerBase
     private readonly IProject<Project> _project;
     private readonly ITransaction<Transaction, ProjectPayment> _transaction;
 
+
+    //public ClientsController(IClient<Client> client)
+    //{
+    //    _client = client;
+    //}
+
+
     public ClientsController(IClient<Client> client, IProject<Project> project, ITransaction<Transaction, ProjectPayment> transaction)
     {
         _client = client;
         _project = project;
         _transaction = transaction;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Complain>>> GetComplains()
+    {
+        var obj = await _client.GetAll();
+        if (obj != null)
+        {
+            return Ok(obj);
+        }
+        return NotFound();
     }
 
     //[HttpPost]

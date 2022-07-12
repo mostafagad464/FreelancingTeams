@@ -53,7 +53,8 @@ namespace FreelancingTeamsAPI.Controllers
         public async Task<ActionResult> GetProposals()
         {
             var proposo = await prop.GetAll();
-            Console.WriteLine("");
+            if (proposo == null)
+                return NoContent();
             return Ok(proposo);
 
         }

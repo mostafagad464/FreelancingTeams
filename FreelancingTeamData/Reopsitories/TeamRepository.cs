@@ -49,7 +49,7 @@ namespace FreelancingTeamData.Reopsitories
 
             db.Teams.Remove(team);
             await db.SaveChangesAsync();
-            
+
 
             return true;
         }
@@ -71,7 +71,8 @@ namespace FreelancingTeamData.Reopsitories
         {
             try
             {
-                return await db.Teams.Include(t => t.TeamMembers).FirstOrDefaultAsync(a => a.Id == id);
+
+                return await db.Teams.Include(t => t.TeamMembers).Include(t => t.Deals).FirstOrDefaultAsync(a => a.Id == id);
             }
             catch
             {
@@ -154,7 +155,8 @@ namespace FreelancingTeamData.Reopsitories
             }
             catch (Exception ex)
             {
-                return new Team() { Description=ex.Message};
+
+                return new Team() { Description = ex.Message };
             }
 
         }

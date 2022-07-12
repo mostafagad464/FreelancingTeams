@@ -49,10 +49,14 @@ builder.Services.AddScoped<IUserSocial<UserSocial>, UserSocialRepository>();
 builder.Services.AddScoped<ITransaction<Transaction, ProjectPayment>, TransactionRepository>();
 builder.Services.AddScoped<ITeamTransactions<TeamTransaction>, TeamTransactionRepository>();
 builder.Services.AddScoped<IReview<Review>, ReviewRepository>();
+
 builder.Services.AddScoped<IMessages<AccountMessage>, AccountMessagesRepository>();
 builder.Services.AddScoped<IMessages<TeamFreelancerMessage>, FreelancerTeamsMessagesRepository>();
 builder.Services.AddScoped<IUserConnection<UserConnection>, UserConnectionRepository>();
 
+builder.Services.AddScoped<IFreelancer<Freelancer>, FreelancerRepository>();
+builder.Services.AddScoped<ITeamMember<TeamMember>, TeamMemberRepository>();
+builder.Services.AddScoped<IClient<Client>, ClientRepository>();
 
 
 

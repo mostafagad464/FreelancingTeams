@@ -60,7 +60,7 @@ namespace FreelancingTeamData.Reopsitories
             var deal = await db.Deals.FindAsync(clientId, TeamId, projectId);
             return deal;
         }
-
+        
         public async Task<Deal> UpdateDeal(Deal d)
         {
             db.Entry(d).State = EntityState.Modified;

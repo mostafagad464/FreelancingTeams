@@ -119,5 +119,22 @@ namespace FreelancingTeamData.Reopsitories
             
 
         }
+        public virtual async Task<IEnumerable<FreelancerExperience>> GetAllFreelancerExperiences(int Id)
+        {
+            try
+            {
+                var obj = await db.FreelancerExperiences.Where(a => a.FreelancerId == Id).ToListAsync();
+                if (obj != null)
+                {
+                    return obj;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return null;
+
+        }
     }
 }
