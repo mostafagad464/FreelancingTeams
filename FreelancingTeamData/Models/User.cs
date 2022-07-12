@@ -14,6 +14,7 @@ namespace FreelancingTeamData.Models
         public User()
         {
             Complains = new HashSet<Complain>();
+            TeamFreelancerMessages = new HashSet<TeamFreelancerMessage>();
             UserCredits = new HashSet<UserCredit>();
             UserLanguages = new HashSet<UserLanguage>();
             UserSocials = new HashSet<UserSocial>();
@@ -60,6 +61,8 @@ namespace FreelancingTeamData.Models
         public virtual Freelancer FreelancerNavigation { get; set; }
         [InverseProperty("ComplainingUser")]
         public virtual ICollection<Complain> Complains { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<TeamFreelancerMessage> TeamFreelancerMessages { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<UserCredit> UserCredits { get; set; }
         [InverseProperty("User")]

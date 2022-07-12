@@ -16,7 +16,6 @@ namespace FreelancingTeamData.Models
         public int? RecieverId { get; set; }
         [Unicode(false)]
         public string Message { get; set; }
-        [Column(TypeName = "date")]
         public DateTime? Date { get; set; }
         public bool? Read { get; set; }
         public bool? Deleted { get; set; }

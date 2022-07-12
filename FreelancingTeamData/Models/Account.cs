@@ -10,7 +10,6 @@ using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 namespace FreelancingTeamData.Models
 {
     [Table("Account")]
-    [Index("IdentityId", Name = "UQ_Account_30667A44620809BC", IsUnique = true)]
     [Index("Username", Name = "UQ_Account_536C85E439D3FF98", IsUnique = true)]
     [Index("Email", Name = "UQ_Account_A9D10534F70C4439", IsUnique = true)]
     public partial class Account
@@ -19,6 +18,7 @@ namespace FreelancingTeamData.Models
         {
             AccountMessageRecievers = new HashSet<AccountMessage>();
             AccountMessageSenders = new HashSet<AccountMessage>();
+            UserConnections = new HashSet<UserConnection>();
             Notifications = new HashSet<Notification>();
         }
 
@@ -51,6 +51,8 @@ namespace FreelancingTeamData.Models
         public virtual ICollection<AccountMessage> AccountMessageRecievers { get; set; }
         [InverseProperty("Sender")]
         public virtual ICollection<AccountMessage> AccountMessageSenders { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<UserConnection> UserConnections { get; set; }
 
         [ForeignKey("AccountId")]
         [InverseProperty("Accounts")]

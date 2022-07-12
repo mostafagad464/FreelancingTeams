@@ -55,8 +55,9 @@ namespace FreelancingTeamData.Reopsitories
                 }
                 return account;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -131,10 +132,27 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
+        public virtual async Task<string> UniqueUserName(string FirstName, string LastName)
+        {
+            string UserName;
+            Account account;
+            int? i = null;
+            do
+            {
+                UserName = FirstName.ToLower() + LastName.ToLower() + i.ToString(); ;
+                account = await db.Accounts.Where(a => a.Username == UserName).FirstOrDefaultAsync();
+                i = (i == null) ? 1 : i + 1;
+            } while (account!=null);
+
+            return UserName;
+        }
+
         public virtual async Task<Account> Update(Account account)
         {
             try
             {
+                var oldaccount = await db.Accounts.AsNoTracking().FirstOrDefaultAsync(a => a.Id == account.Id);
+                account.Password = oldaccount.Password;
                 db.Entry(account).State = EntityState.Modified;
                 try
                 {
@@ -153,7 +171,7 @@ namespace FreelancingTeamData.Reopsitories
                 }
                 return account;
             }
-            catch
+            catch(Exception ex)
             {
                 return null;
             }
@@ -162,7 +180,30 @@ namespace FreelancingTeamData.Reopsitories
         {
             try
             {
-                var obj = await db.Accounts.Where(e => (e.Email == usernameORemail || e.Username == usernameORemail) && e.Password == password).FirstOrDefaultAsync();
+                var obj = await db.Accounts.Where(e => (e.Email == usernameORemail || e.Username == usernameORemail) && e.Password == password).Include(a => a.User).FirstOrDefaultAsync();
+                if(obj != null)
+                {
+                    obj.User.ActiveStatus = true;
+                    db.SaveChanges();
+                }
+                return obj;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Account> Logout(int id)
+        {
+            try
+            {
+                var obj = await db.Accounts.Where(e => e.Id == id).Include(a => a.User).FirstOrDefaultAsync();
+                if (obj != null)
+                {
+                    obj.User.ActiveStatus = false;
+                    db.SaveChanges();
+                }
                 return obj;
             }
             catch (Exception)

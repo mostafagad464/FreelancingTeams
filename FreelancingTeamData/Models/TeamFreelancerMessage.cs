@@ -12,11 +12,10 @@ namespace FreelancingTeamData.Models
     {
         [Key]
         public int Id { get; set; }
-        public int? ClientId { get; set; }
+        public int? UserId { get; set; }
         public int? TeamId { get; set; }
         [Unicode(false)]
         public string Message { get; set; }
-        [Column(TypeName = "date")]
         public DateTime? Date { get; set; }
         [StringLength(5)]
         [Unicode(false)]
@@ -24,9 +23,9 @@ namespace FreelancingTeamData.Models
         public bool? Read { get; set; }
         public bool? Deleted { get; set; }
 
-        [ForeignKey("ClientId")]
+        [ForeignKey("UserId")]
         [InverseProperty("TeamFreelancerMessages")]
-        public virtual Client Client { get; set; }
+        public virtual User User { get; set; }
         [ForeignKey("TeamId")]
         [InverseProperty("TeamFreelancerMessages")]
         public virtual Team Team { get; set; }

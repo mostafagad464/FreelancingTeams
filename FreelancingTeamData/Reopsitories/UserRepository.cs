@@ -1,6 +1,7 @@
 ﻿using FreelancingTeamData.Data;
 using FreelancingTeamData.Interfaces;
 using FreelancingTeamData.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,17 @@ namespace FreelancingTeamData.Reopsitories
             {
                 return null;
             }
-            db.Users.Add(user);
             try
             {
+                await db.Users.AddAsync(user);
+                if (user.Freelancer == true && user.FreelancerNavigation == null)
+                {
+                    await db.Freelancers.AddAsync(new Freelancer() { Id = user.Id });
+                }
+                else if(user.Client == true && user.ClientNavigation == null)
+                {
+                    await db.Clients.AddAsync(new Client() { Id = user.Id });
+                }
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateException)
@@ -132,6 +141,23 @@ namespace FreelancingTeamData.Reopsitories
             }
             return user;
         }
+
+        public async Task<Byte[]> SetImage(int UserId, IFormFile image)
+        {
+            Stream stream = image.OpenReadStream();
+            BinaryReader binaryReader = new BinaryReader(stream);
+            Byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+            db.Users.FirstOrDefault(a => a.Id == UserId).Image = bytes;
+            db.SaveChanges();
+            return bytes;
+        }
+
+        public async Task<Byte[]> GetImage(int UserId)
+        {
+            var user = await db.Users.FirstOrDefaultAsync(a => a.Id == UserId);
+            return user?.Image;
+        }
+
         private bool UserExists(int id)
         {
             return (db.Users?.Any(e => e.Id == id)).GetValueOrDefault();

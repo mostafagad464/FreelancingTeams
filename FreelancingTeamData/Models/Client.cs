@@ -17,7 +17,6 @@ namespace FreelancingTeamData.Models
             ProjectPayments = new HashSet<ProjectPayment>();
             Projects = new HashSet<Project>();
             Reviews = new HashSet<Review>();
-            TeamFreelancerMessages = new HashSet<TeamFreelancerMessage>();
         }
 
         [Key]
@@ -34,7 +33,5 @@ namespace FreelancingTeamData.Models
         public virtual ICollection<Project> Projects { get; set; }
         [InverseProperty("Client")]
         public virtual ICollection<Review> Reviews { get; set; }
-        [InverseProperty("Client")]
-        public virtual ICollection<TeamFreelancerMessage> TeamFreelancerMessages { get; set; }
     }
 }

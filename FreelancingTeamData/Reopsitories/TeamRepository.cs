@@ -70,6 +70,7 @@ namespace FreelancingTeamData.Reopsitories
         {
             try
             {
+
                 return await db.Teams.Include(t => t.TeamMembers).Include(t => t.Deals).FirstOrDefaultAsync(a => a.Id == id);
             }
             catch
@@ -153,6 +154,7 @@ namespace FreelancingTeamData.Reopsitories
             }
             catch (Exception ex)
             {
+
                 return new Team() { Description = ex.Message };
             }
 

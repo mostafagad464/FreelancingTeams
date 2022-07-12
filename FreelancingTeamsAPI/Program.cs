@@ -2,7 +2,6 @@ using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-
 using FreelancingTeamData.Data;
 using FreelancingTeamData.Interfaces;
 using FreelancingTeamData.Reopsitories;
@@ -11,6 +10,7 @@ using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
+using FreelancingTeamsAPI.Hubs;
 
 string s = "";
 
@@ -49,6 +49,11 @@ builder.Services.AddScoped<IUserSocial<UserSocial>, UserSocialRepository>();
 builder.Services.AddScoped<ITransaction<Transaction, ProjectPayment>, TransactionRepository>();
 builder.Services.AddScoped<ITeamTransactions<TeamTransaction>, TeamTransactionRepository>();
 builder.Services.AddScoped<IReview<Review>, ReviewRepository>();
+
+builder.Services.AddScoped<IMessages<AccountMessage>, AccountMessagesRepository>();
+builder.Services.AddScoped<IMessages<TeamFreelancerMessage>, FreelancerTeamsMessagesRepository>();
+builder.Services.AddScoped<IUserConnection<UserConnection>, UserConnectionRepository>();
+
 builder.Services.AddScoped<IFreelancer<Freelancer>, FreelancerRepository>();
 builder.Services.AddScoped<ITeamMember<TeamMember>, TeamMemberRepository>();
 builder.Services.AddScoped<IClient<Client>, ClientRepository>();
@@ -57,6 +62,8 @@ builder.Services.AddScoped<IClient<Client>, ClientRepository>();
 
 
 builder.Services.AddControllers();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -75,7 +82,8 @@ builder.Services.AddCors(opstion =>
             builder.AllowAnyOrigin();
             builder.AllowAnyMethod();
             builder.AllowAnyHeader();
-        });
+            builder.AllowCredentials().WithOrigins("http://localhost:4200");
+        }) ;
 });
 
 //JWT 
@@ -105,6 +113,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors(s);
 
 app.UseHttpsRedirection();
+
+app.MapHub<ChatHub>("/chat");
 
 app.UseAuthentication();
 app.UseAuthorization();

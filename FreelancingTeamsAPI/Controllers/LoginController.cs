@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace FreelancingTeamsAPI.Controllers
@@ -18,23 +19,27 @@ namespace FreelancingTeamsAPI.Controllers
             account = _account;
         }
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(usr usr)
         {
-            if (username != null && password != null)
+            if (usr.username != null && usr.password != null)
             {
-                var Res = await account.Login(username, password);
+                var Res = await account.Login(usr.username, usr.password);
                 if (Res != null)
                 {
                     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("welcome to my key"));
 
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+                    var data = new List<Claim>();
+                    data.Add(new Claim("Id", Res.Id.ToString()));
+                    data.Add(new Claim("Role", Res.Type));
+
                     var token = new JwtSecurityToken(
-                    null,
+                    claims:data,
                     expires: DateTime.Now.AddMinutes(120),
                     signingCredentials: credentials);
 
-                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                    return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
                 }
                 else
                 {
@@ -46,6 +51,23 @@ namespace FreelancingTeamsAPI.Controllers
                 return BadRequest();
             }
         }
+        [HttpPost("/api/Logout")]
+        public async Task<IActionResult> Logout(int Id)
+        {
+            if (Id != 0 )
+            {
+                await account.Logout(Id);
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
-
+    public class usr
+    {
+        public string username { get; set; }
+        public string password { get; set; }
+    }
 }
