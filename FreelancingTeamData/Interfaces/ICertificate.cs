@@ -17,5 +17,7 @@ namespace FreelancingTeamData.Interfaces
         public Task<T> GetById(int freelancerId, string title);  
                                                
         public Task<T> Delete(int freelancerId, string title);
+
+        public Task<IEnumerable<T>> GetAllFreelancerCertificates(int Id);
     }
 }

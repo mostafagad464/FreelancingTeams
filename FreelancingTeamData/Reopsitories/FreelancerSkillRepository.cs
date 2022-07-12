@@ -86,6 +86,26 @@ namespace FreelancingTeamData.Reopsitories
             }
         }
 
+        public virtual async Task<IEnumerable<FreelancerSkill>> GetSkillCategoryNamesById(int Id)
+        {
+            try
+            {
+            
+                var obj = await _db.FreelancerSkills.Where(a => a.FreelancerId == Id).Include(s => s.Skill).ToListAsync();
+               
+                if (obj != null)
+                {
+                    return obj;
+                }
+                return null;
+            }
+            catch(Exception)
+            {
+                return null;
+
+            }
+        }
+
         public virtual async Task<FreelancerSkill> Update(int freelancerId, int skillId, FreelancerSkill _object)
         {
             try

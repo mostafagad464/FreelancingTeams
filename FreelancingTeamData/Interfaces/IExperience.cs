@@ -17,5 +17,7 @@ namespace FreelancingTeamData.Interfaces
         public Task<T> GetById(int id, DateTime? startDate);
 
         public Task<T> Delete(int id, DateTime? startDate);
+
+        public Task<IEnumerable<T>> GetAllFreelancerExperiences(int Id);
     }
 }
