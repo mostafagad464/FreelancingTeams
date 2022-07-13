@@ -98,10 +98,17 @@ namespace FreelancingTeamData.Reopsitories
             {
                 return null;
             }
-
-
-
-
+        }
+        public virtual async Task<IEnumerable<Portoflio>> GetFreelancerPortfolio(int id)
+        {
+            try
+            {
+                return await db.Portoflios.Where(a => a.FreelancerId == id).ToListAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
 
 
         }
