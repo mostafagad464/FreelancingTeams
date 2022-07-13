@@ -16,13 +16,10 @@ namespace FreelancingTeamsAPI.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly ITeam<Team> TeamRepository;
-        FreeLanceProjectContext _context;
 
-        public TeamsController(ITeam<Team> _TeamRepository, FreeLanceProjectContext context)
+        public TeamsController(ITeam<Team> _TeamRepository)
         {
             TeamRepository = _TeamRepository;
-
-            _context = context;
         }
 
         // GET: api/Teams
@@ -83,6 +80,9 @@ namespace FreelancingTeamsAPI.Controllers
         {
             if (team == null)
                 return BadRequest();
+            team.CreationDate = DateTime.Now;
+            if (team.WalletId == 0)
+                team.WalletId = null;
 
             var NewTeam = await TeamRepository.Create(team);
             if (NewTeam == null) //Not Added --> duplicate website 

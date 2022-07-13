@@ -26,7 +26,8 @@ namespace FreelancingTeamData.Reopsitories
             {
                 var team = await db.Teams.AddAsync(_object);
                 await db.SaveChangesAsync();
-                return await db.Teams.FindAsync(_object.Id);
+                //return await db.Teams.FindAsync(_object.Id);
+                return team.Entity;
             }
             catch
             {
