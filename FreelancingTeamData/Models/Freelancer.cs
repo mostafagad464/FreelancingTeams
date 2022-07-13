@@ -29,6 +29,7 @@ namespace FreelancingTeamData.Models
         public decimal? TotalMoney { get; set; }
         public int? NumberOfClients { get; set; }
         public double? AVGHourlyRate { get; set; }
+        public string Specialization { get; set; }
 
         [ForeignKey("Id")]
         [InverseProperty("FreelancerNavigation")]
