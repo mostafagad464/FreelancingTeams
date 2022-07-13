@@ -7,6 +7,7 @@ using FreelancingTeamData.Interfaces;
 using FreelancingTeamData.Data;
 using FreelancingTeamData.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace FreelancingTeamData.Reopsitories
 {
@@ -161,6 +162,20 @@ namespace FreelancingTeamData.Reopsitories
 
         }
 
+        public async Task<byte[]> SetImage(int TeamId, IFormFile image)
+        {
+            Stream stream = image.OpenReadStream();
+            BinaryReader binaryReader = new BinaryReader(stream);
+            Byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+            db.Teams.FirstOrDefault(a => a.Id == TeamId).Logo = bytes;
+            db.SaveChanges();
+            return bytes;
+        }
 
+        public async Task<byte[]> GetImage(int TeamId)
+        {
+            var team = await db.Teams.FirstOrDefaultAsync(a => a.Id == TeamId);
+            return team?.Logo;
+        }
     }
 }

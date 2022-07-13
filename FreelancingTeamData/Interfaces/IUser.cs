@@ -9,12 +9,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace FreelancingTeamData.Interfaces
 {
-    public interface IUser<T> : ICRUD<T>
+    public interface IUser<T> : ICRUD<T>, IImage
     {
         public abstract Task<IEnumerable<T>> GetFreelancers();
         public abstract Task<IEnumerable<T>> GetClients();
-        public Task<Byte[]> SetImage(int UserId, IFormFile image);
-        public Task<Byte[]> GetImage(int UserId);
 
     }
 }

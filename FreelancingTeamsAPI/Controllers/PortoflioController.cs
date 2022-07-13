@@ -38,18 +38,18 @@ namespace FreelancingTeamsAPI.Controllers
 
         }
         // GET: api/Portoflio/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Portoflio>> GetPortoflio(int id)
-        {
-            var reqPortof = await portof.GetById(id);
-            if (reqPortof == null)
-            {
-                return NotFound();
-            }
-            return Ok(reqPortof);
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Portoflio>> GetPortoflio(int id)
+        //{
+        //    var reqPortof = await portof.GetById(id);
+        //    if (reqPortof == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(reqPortof);
 
 
-        }
+        //}
 
         //// POST: api/Portoflio
         [HttpPost]
@@ -66,7 +66,7 @@ namespace FreelancingTeamsAPI.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeletePortoflio(int id)
         {
             var vlaue=await portof.Delete(id);
@@ -86,6 +86,21 @@ namespace FreelancingTeamsAPI.Controllers
                 return BadRequest();
             }
             return Ok(updatedPorto);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<Portoflio>>> GetFreelancerPortoflios(int id)
+        {
+            IEnumerable<Portoflio> portfolios = await portof.GetFreelancerPortfolio(id);
+
+            if (portfolios == null)
+            {
+                return BadRequest();
+
+            }
+            return Ok(portfolios);
+
+
         }
 
     }

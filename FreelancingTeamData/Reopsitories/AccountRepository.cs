@@ -124,7 +124,7 @@ namespace FreelancingTeamData.Reopsitories
                 {
                     return null;
                 }
-                return await db.Accounts.FindAsync(id);
+                return await db.Accounts.Include(a=>a.User).ThenInclude(u=>u.FreelancerNavigation).FirstOrDefaultAsync(a=>a.Id==id);
             }
             catch
             {
