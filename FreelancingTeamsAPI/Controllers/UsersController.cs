@@ -26,10 +26,14 @@ namespace FreelancingTeamsAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var obj = await user.GetAll();
-            if (obj != null)
+            var objs = await user.GetAll();
+            if (objs != null)
             {
-                return Ok(obj);
+                foreach (var item in objs)
+                {
+                    item.Image = null;
+                }
+                return Ok(objs);
             }
             return NotFound();
         }
@@ -37,10 +41,14 @@ namespace FreelancingTeamsAPI.Controllers
         [HttpGet("Clients")]
         public async Task<ActionResult<IEnumerable<User>>> GetClients()
         {
-            var obj = await user.GetClients();
-            if (obj != null)
+            var objs = await user.GetClients();
+            if (objs != null)
             {
-                return Ok(obj);
+                foreach (var item in objs)
+                {
+                    item.Image = null;
+                }
+                return Ok(objs);
             }
             return NotFound();
         }
@@ -48,10 +56,14 @@ namespace FreelancingTeamsAPI.Controllers
         [HttpGet("Freelancers")]
         public async Task<ActionResult<IEnumerable<User>>> GetFreelancers()
         {
-            var obj = await user.GetFreelancers();
-            if (obj != null)
+            var objs = await user.GetFreelancers();
+            if (objs != null)
             {
-                return Ok(obj);
+                foreach (var item in objs)
+                {
+                    item.Image = null;
+                }
+                return Ok(objs);
             }
             return NotFound();
         }
@@ -63,6 +75,7 @@ namespace FreelancingTeamsAPI.Controllers
             var obj = await user.GetById(id);
             if (obj != null)
             {
+                obj.Image = null;
                 return Ok(obj);
             }
             return NotFound();
@@ -78,6 +91,7 @@ namespace FreelancingTeamsAPI.Controllers
                 var obj = await user.Update(User);
                 if (obj != null)
                 {
+                    obj.Image = null;
                     return Ok(obj);
                 }
                 return NotFound();

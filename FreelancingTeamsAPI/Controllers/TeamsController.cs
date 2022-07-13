@@ -21,7 +21,6 @@ namespace FreelancingTeamsAPI.Controllers
         public TeamsController(ITeam<Team> _TeamRepository, FreeLanceProjectContext context)
         {
             TeamRepository = _TeamRepository;
-
             _context = context;
         }
 
@@ -31,9 +30,14 @@ namespace FreelancingTeamsAPI.Controllers
         {
             var teams = await TeamRepository.GetAll();
             if (teams == null)
+            {
                 return NotFound();
-            else
-                return Ok(teams);
+            }
+            foreach (var team in teams)
+            {
+                team.Logo = null;
+            }
+            return Ok(teams);
         }
 
         // GET: api/Teams/5
@@ -42,9 +46,11 @@ namespace FreelancingTeamsAPI.Controllers
         {
             var team = await TeamRepository.GetById(id);
             if (team == null)
+            {
                 return NotFound();
-            else
-                return Ok(team);
+            }
+            team.Logo = null;
+            return Ok(team);
 
         }
 
@@ -59,9 +65,11 @@ namespace FreelancingTeamsAPI.Controllers
             }
             var EditedTeam = await TeamRepository.Update(team);
             if (EditedTeam == null)
+            {
                 return BadRequest();
-            else
-                return Ok(EditedTeam);
+            }
+            EditedTeam.Logo = null;
+            return Ok(EditedTeam);
         }
 
         //PUT: api/Teams/TeamMember
