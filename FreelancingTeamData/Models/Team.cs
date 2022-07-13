@@ -42,7 +42,6 @@ namespace FreelancingTeamData.Models
         public string? Name { get; set; }
 
 
-
         [ForeignKey("LeaderId")]
         [InverseProperty("Teams")]
         public virtual Freelancer Leader { get; set; }
