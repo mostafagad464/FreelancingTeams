@@ -41,7 +41,7 @@ namespace FreelancingTeamData.Models
         public int? WalletId { get; set; }
         public string? Name { get; set; }
 
-        public string? Name { get; set; }
+
 
         [ForeignKey("LeaderId")]
         [InverseProperty("Teams")]
