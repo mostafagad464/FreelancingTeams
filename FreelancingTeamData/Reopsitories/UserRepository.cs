@@ -106,8 +106,9 @@ namespace FreelancingTeamData.Reopsitories
             }
             var user = await db.Users.Include(u => u.ClientNavigation)
                                      .Include(u => u.IdNavigation)
-                                     .Include(u => u.FreelancerNavigation)
-                                     .ThenInclude(f => f.FreelancerCertificates).FirstOrDefaultAsync(u=>u.Id == id);
+                                     .Include(u => u.FreelancerNavigation).ThenInclude(f => f.FreelancerCertificates)
+                                     .Include(u => u.FreelancerNavigation).ThenInclude(f => f.TeamMembers)
+                                     .FirstOrDefaultAsync(u=>u.Id == id);
             return user;
         }
 

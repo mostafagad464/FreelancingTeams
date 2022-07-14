@@ -64,5 +64,27 @@ namespace FreelancingTeamData.Reopsitories
                 return null;
             }
         }
+
+        public async Task<IEnumerable<TeamFreelancerMessage>> SetChatRead(int TeamId, int UserId, string Sender)
+        {
+            if (db.TeamFreelancerMessages == null)
+            {
+                return null;
+            }
+            var messages = db.TeamFreelancerMessages.Where(m => m.TeamId == TeamId && m.UserId == UserId && m.Sender == Sender).ToList();
+            foreach (var message in messages)
+            {
+                message.Read = true;
+            }
+            try
+            {
+                db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return messages;
+        }
     }
 }
