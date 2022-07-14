@@ -80,6 +80,7 @@ namespace FreelancingTeamsAPI.Controllers
             if (freelancerSkill != null)
             {
                 var obj = await _skill.Create(freelancerSkill);
+             
                 if (obj != null)
                 {
                     return Created("FreeLancerSkill", obj);

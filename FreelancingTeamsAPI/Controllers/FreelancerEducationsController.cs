@@ -105,6 +105,26 @@ namespace FreelancingTeamsAPI.Controllers
             }
             return BadRequest();          
         }
+        [HttpGet("GetFreelancerEducation/{id}")]
+        public async Task<ActionResult<IEnumerable<FreelancerSkill>>> GetFreelancerEducation(int id)
+        {
+            try
+            {
+                var obj = await _education.GetEducationById(id);
+
+                if (obj != null)
+                {
+                    return Ok(obj);
+                }
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+
+        }
 
         //private bool FreelancerEducationExists(int id)
         //{

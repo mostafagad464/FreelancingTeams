@@ -17,6 +17,7 @@ namespace FreelancingTeamData.Interfaces
         public Task<T> GetById(int freelancerId, int id);
 
         public Task<T> Delete(int freelancerId, int id);
+        public Task<IEnumerable<T>> GetEducationById(int Id);
 
         public Task<IEnumerable<T>> GetSkillCategoryNamesById(int Id);
     }
