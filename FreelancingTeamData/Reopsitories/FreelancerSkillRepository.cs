@@ -126,5 +126,10 @@ namespace FreelancingTeamData.Reopsitories
             }
             
         }
+
+        Task<IEnumerable<FreelancerSkill>> IEducationSkill<FreelancerSkill>.GetEducationById(int Id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

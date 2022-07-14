@@ -22,15 +22,15 @@ namespace FreelancingTeamData.Reopsitories
 
         public async Task<Wallet> Create(Wallet wallet)
         {
-            if (db.Wallets == null)
-            {
-                return null;
-            }
+            //if (db.Wallets == null)
+            //{
+            //    return null;
+            //}
             try { 
-            db.Wallets.Add(wallet);
-            await db.SaveChangesAsync();
+                var newWallet = await db.Wallets.AddAsync(wallet);
+                await db.SaveChangesAsync();
 
-            return wallet;
+                return newWallet.Entity;
             }
             catch (Exception ex)
             {

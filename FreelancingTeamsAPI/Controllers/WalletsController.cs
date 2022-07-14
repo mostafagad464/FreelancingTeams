@@ -15,15 +15,11 @@ namespace FreelancingTeamsAPI.Controllers
     [ApiController]
     public class WalletsController : ControllerBase
     {
-        private readonly FreeLanceProjectContext _context;
         private IWallet<Wallet> walletProp;
 
-        public WalletsController(FreeLanceProjectContext context, IWallet<Wallet> _walletProp)
+        public WalletsController(IWallet<Wallet> _walletProp)
         {
-            _context = context;
             walletProp = _walletProp;
-
-
         }
 
         // GET: api/Wallets
@@ -73,12 +69,12 @@ namespace FreelancingTeamsAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Wallet>> PostWallet(Wallet wallet)
         {
-            var obj = await walletProp.Create(wallet);
-            if (obj == null)
+            var newWalet = await walletProp.Create(wallet);
+            if (newWalet == null)
             {
                 return BadRequest();
             }
-            return Ok(wallet);
+            return Created( "Success" , newWalet);
 
         }
 
