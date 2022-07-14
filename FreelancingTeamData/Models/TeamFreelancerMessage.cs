@@ -19,7 +19,7 @@ namespace FreelancingTeamData.Models
         public DateTime? Date { get; set; }
         [StringLength(5)]
         [Unicode(false)]
-        public string Sender { get; set; }
+        public string Sender { get; set; } // T or U
         public bool? Read { get; set; }
         public bool? Deleted { get; set; }
 

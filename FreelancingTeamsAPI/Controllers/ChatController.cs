@@ -46,7 +46,23 @@ namespace FreelancingTeamsAPI.Controllers
             var retMessage = await _teamFreelancerMessage.SendMessage(message);
             if (retMessage != null)
             {
-                _hubContext.Clients.All.TeamsAndFreelancersMesseging(message);
+                if(retMessage.Sender == "T" || retMessage.Sender == "t")
+                {
+                    var Ids = await _userConnection.GetConnectionIds((int)retMessage.UserId);
+                    foreach (var Id in Ids)
+                    {
+                        _hubContext.Clients.Client(Id).TeamsAndFreelancersMesseging(retMessage);
+                    }
+                }
+                else if(retMessage.Sender == "U" || retMessage.Sender == "u")
+                {
+                    _hubContext.Clients.Group("team" + retMessage.TeamId).TeamsAndFreelancersMesseging(retMessage);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+                //_hubContext.Clients.All.TeamsAndFreelancersMesseging(message);
                 return Ok(retMessage);
             }
             return Problem("Entity set 'FreeLanceProjectContext.AccountMessages'  is null.");
@@ -96,6 +112,28 @@ namespace FreelancingTeamsAPI.Controllers
             }
             return Ok(Chats);
 
+        }
+
+        [HttpPut("account")]
+        public async Task<ActionResult<IEnumerable<AccountMessage>>> SetChatRead(int SenderId, int RecieverId)
+        {
+            var newChat = await _accountMessage.SetChatRead(SenderId, RecieverId,null);
+            if (newChat == null)
+            {
+                return NotFound();
+            }
+            return Ok(newChat);
+        }
+
+        [HttpPut("team")]
+        public async Task<ActionResult<IEnumerable<AccountMessage>>> SetTeamChatRead(int TeamId, int UserId, string Sender)
+        {
+            var newChat = await _teamFreelancerMessage.SetChatRead(TeamId, UserId, Sender);
+            if (newChat == null)
+            {
+                return NotFound();
+            }
+            return Ok(newChat);
         }
     }
 }

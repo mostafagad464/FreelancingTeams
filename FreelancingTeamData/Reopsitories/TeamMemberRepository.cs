@@ -40,7 +40,7 @@ namespace FreelancingTeamData.Reopsitories
                     await _db.SaveChangesAsync();
                     return _object;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return null;
                 }

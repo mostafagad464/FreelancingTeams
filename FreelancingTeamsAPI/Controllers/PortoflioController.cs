@@ -55,14 +55,15 @@ namespace FreelancingTeamsAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Portoflio>> PostPortoflio(Portoflio portoflio)
         {
-            portof.Create(portoflio);
-
             if(portoflio==null)
             {
                 return BadRequest();
 
             }
-            return Ok(portoflio);
+
+            var newport = await portof.Create(portoflio);
+
+            return Ok(newport);
 
         }
 

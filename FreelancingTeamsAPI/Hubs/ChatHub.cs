@@ -12,9 +12,11 @@ namespace FreelancingTeamsAPI.Hubs
     public class ChatHub : Hub<IHubClient>
     {
         IUserConnection<UserConnection> _Repo;
-        public ChatHub(IUserConnection<UserConnection> Repo)
+        IUser<User> _user;
+        public ChatHub(IUserConnection<UserConnection> Repo, IUser<User> user)
         {
             _Repo = Repo;
+            _user = user;
         }
         public async override Task<Task> OnConnectedAsync()
         {
@@ -26,6 +28,18 @@ namespace FreelancingTeamsAPI.Hubs
                 var id = tokenS.Claims.First(claim => claim.Type == "Id").Value;
 
                 await _Repo.AddUserConnection(int.Parse(id), Context.ConnectionId);
+
+                // Add User to team Group
+                var user = await _user.GetById(int.Parse(id));
+                if(user!= null && user.Freelancer == true)
+                {
+                    foreach (var team in user.FreelancerNavigation.TeamMembers)
+                    {
+                        Console.WriteLine("******************************************");
+                        Console.WriteLine("team" + team.TeamId);
+                        Groups.AddToGroupAsync(Context.ConnectionId, "team" + team.TeamId);
+                    }
+                }
 
             }
             return base.OnConnectedAsync();
