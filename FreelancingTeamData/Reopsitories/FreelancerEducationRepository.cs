@@ -111,5 +111,26 @@ namespace FreelancingTeamData.Reopsitories
                 return null;
             }        
         }
+        //public virtual async Task<IEnumerable<FreelancerSkill>> GetSkillCategoryNamesById(int Id)
+
+        public virtual async Task<IEnumerable<FreelancerEducation>> GetEducationById(int Id)
+        {
+            try
+            {
+
+                var obj = await _db.FreelancerEducations.Where(a => a.FreelancerId == Id).ToListAsync();
+
+                if (obj != null)
+                {
+                    return obj;
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+
+            }
+        }
     }
 }
