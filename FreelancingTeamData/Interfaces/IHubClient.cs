@@ -11,5 +11,7 @@ namespace FreelancingTeamData.Interfaces
     {
         Task AccountsMessaging(AccountMessage message);
         Task TeamsAndFreelancersMesseging(TeamFreelancerMessage message);
+        Task Notify(Notification not);
+
     }
 }

@@ -1,19 +1,15 @@
 ﻿using FreelancingTeamData.Interfaces;
 using FreelancingTeamData.Models;
-using FreelancingTeamData.Reopsitories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Web;
 
 namespace FreelancingTeamsAPI.Hubs
 {
-    public class ChatHub : Hub<IHubClient>
+    public class NotificationHub : Hub<IHubClient>
     {
         IUserConnection<UserConnection> _Repo;
         IUser<User> _user;
-        public ChatHub(IUserConnection<UserConnection> Repo, IUser<User> user)
+        public NotificationHub(IUserConnection<UserConnection> Repo, IUser<User> user)
         {
             _Repo = Repo;
             _user = user;
@@ -31,7 +27,7 @@ namespace FreelancingTeamsAPI.Hubs
 
                 // Add User to team Group
                 var user = await _user.GetById(int.Parse(id));
-                if(user!= null && user.Freelancer == true)
+                if (user != null && user.Freelancer == true)
                 {
                     foreach (var team in user.FreelancerNavigation.TeamMembers)
                     {
