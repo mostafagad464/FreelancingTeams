@@ -30,6 +30,7 @@ namespace FreelancingTeamsAPI.Controllers
                 var Ids = await _userConnection.GetConnectionIds((int)retNoti.Accounts.FirstOrDefault().Id);
                 foreach (var Id in Ids)
                 {
+                    retNoti.Accounts.Clear();
                     _hubContext.Clients.Client(Id).Notify(retNoti);
                 }
                 return Ok(retNoti);
@@ -71,5 +72,28 @@ namespace FreelancingTeamsAPI.Controllers
             }
             return Ok(Notifications);
         }
+
+        [HttpGet("account/count/{Id}")]
+        public async Task<ActionResult<IEnumerable<int>>> GetAccNotifNum(int Id)
+        {
+            var Notifications = await _notification.GetAllAccNot(Id);
+            if (Notifications == null)
+            {
+                return NotFound();
+            }
+            return Ok(new {count = Notifications.Where(a => a.Read == false).Count()});
+        }
+
+        [HttpGet("team/count/{Id}")]
+        public async Task<ActionResult<IEnumerable<int>>> GetTeamNotifNum(int Id)
+        {
+            var Notifications = await _notification.GetAllTeamNot(Id);
+            if (Notifications == null)
+            {
+                return NotFound();
+            }
+            return Ok(new { count = Notifications.Where(a => a.Read == false).Count() });
+        }
+
     }
 }

@@ -122,6 +122,11 @@ namespace FreelancingTeamsAPI.Controllers
             {
                 return NotFound();
             }
+            var Ids = await _userConnection.GetConnectionIds(RecieverId);
+            foreach (var Id in Ids)
+            {
+                _hubContext.Clients.Client(Id).AccountMessagesUpdate(" ");
+            }
             return Ok(newChat);
         }
 
@@ -133,7 +138,26 @@ namespace FreelancingTeamsAPI.Controllers
             {
                 return NotFound();
             }
+            if(Sender == "t")
+            {
+                var Ids = await _userConnection.GetConnectionIds(UserId);
+                foreach (var Id in Ids)
+                {
+                    _hubContext.Clients.Client(Id).AccountMessagesUpdate(" ");
+                }
+            }
             return Ok(newChat);
+        }
+
+        [HttpGet("account/count/{Id}")]
+        public async Task<ActionResult<IEnumerable<int>>> GetCount(int Id)
+        {
+            var Chats = await _accountMessage.GetAllChats(Id, null);
+            if (Chats == null)
+            {
+                return NotFound();
+            }
+            return Ok(new { count = Chats.Where(c => c.Read == false && c.RecieverId == Id).Count() });
         }
     }
 }
