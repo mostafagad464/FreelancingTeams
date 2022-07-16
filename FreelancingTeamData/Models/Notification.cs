@@ -21,6 +21,13 @@ namespace FreelancingTeamData.Models
         public int Id { get; set; }
         [Unicode(false)]
         public string Description { get; set; }
+        [StringLength(10)]
+        [Unicode(false)]
+        public string type { get; set; }
+        public int? type_id { get; set; }
+        public bool? Accepted { get; set; }
+        public bool? Read { get; set; }
+        public DateTime? Date { get; set; }
 
         [ForeignKey("NotificationId")]
         [InverseProperty("Notifications")]

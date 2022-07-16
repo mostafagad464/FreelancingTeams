@@ -183,8 +183,8 @@ namespace FreelancingTeamData.Reopsitories
                 var obj = await db.Accounts.Where(e => (e.Email == usernameORemail || e.Username == usernameORemail) && e.Password == password).Include(a => a.User).FirstOrDefaultAsync();
                 if(obj != null)
                 {
-                    obj.User.ActiveStatus = true;
-                    db.SaveChanges();
+                    //obj.User.ActiveStatus = true;
+                    db.SaveChangesAsync();
                 }
                 return obj;
             }
@@ -201,7 +201,7 @@ namespace FreelancingTeamData.Reopsitories
                 var obj = await db.Accounts.Where(e => e.Id == id).Include(a => a.User).FirstOrDefaultAsync();
                 if (obj != null)
                 {
-                    obj.User.ActiveStatus = false;
+                    //obj.User.ActiveStatus = false;
                     db.SaveChanges();
                 }
                 return obj;
