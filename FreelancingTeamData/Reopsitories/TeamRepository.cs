@@ -59,7 +59,7 @@ namespace FreelancingTeamData.Reopsitories
         {
             try
             {
-                var list = await db.Teams.ToListAsync();
+                var list = await db.Teams.Include("TeamMembers").ToListAsync();
                 return list;
             }
             catch

@@ -18,6 +18,8 @@ namespace FreelancingTeamData.Interfaces
 
         public Task<bool> Delete(int teamId, int freelancerId);
 
-        Task<IEnumerable<T>> GetMembers(int teamId);
+        public Task<IEnumerable<T>> GetMembers(int teamId);
+
+        public Task<T> GetFreelancer(T _object);
     }
 }

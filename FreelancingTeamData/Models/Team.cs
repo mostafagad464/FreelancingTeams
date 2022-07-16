@@ -40,6 +40,7 @@ namespace FreelancingTeamData.Models
         public int? LeaderId { get; set; }
         public int? WalletId { get; set; }
         public string? Name { get; set; }
+        public string? Specialization { get; set; }
 
 
         [ForeignKey("LeaderId")]

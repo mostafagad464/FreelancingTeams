@@ -102,6 +102,21 @@ namespace FreelancingTeamData.Reopsitories
             }           
         }
 
+        public async Task<TeamMember> GetFreelancer(TeamMember teamMemberRecived)
+        {
+            try
+            {
+                TeamMember teamMember = new TeamMember();
+                teamMember = await _db.TeamMembers.Where(a => a.TeamId == teamMemberRecived.TeamId && a.FreelancerId == teamMemberRecived.FreelancerId).FirstOrDefaultAsync();
+                return teamMember;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
         public Task<TeamMember> Update(int teamId, int freelancerId, TeamMember _object)
         {
             throw new NotImplementedException();

@@ -31,6 +31,7 @@ namespace FreelancingTeamData.Models
         public double? AVGHourlyRate { get; set; }
         public string? Specialization { get; set; }
 
+
         [ForeignKey("Id")]
         [InverseProperty("FreelancerNavigation")]
         public virtual User IdNavigation { get; set; }

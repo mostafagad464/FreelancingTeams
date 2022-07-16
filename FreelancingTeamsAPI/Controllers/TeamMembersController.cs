@@ -104,6 +104,20 @@ namespace FreelancingTeamsAPI.Controllers
             return BadRequest();
         }
 
+        [HttpGet]
+        public async Task<ActionResult<TeamMember>> GetTeamMember(TeamMember teamMember)
+        {
+            if (teamMember.FreelancerId != 0 && teamMember.TeamId != 0)
+            {
+                var obj = await _member.GetFreelancer(teamMember);
+                if (obj != null)
+                {
+                    return Ok(obj);
+                }
+            }
+            return BadRequest();
+        }
+
         //private bool TeamMemberExists(int id)
         //{
         //    return (_context.TeamMembers?.Any(e => e.TeamId == id)).GetValueOrDefault();
