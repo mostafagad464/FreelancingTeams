@@ -104,7 +104,6 @@ namespace FreelancingTeamsAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User User)
         {
-
             if (User != null)
             {
                 var obj = await user.Create(User);
