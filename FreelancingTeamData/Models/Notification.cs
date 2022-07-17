@@ -21,7 +21,7 @@ namespace FreelancingTeamData.Models
         public int Id { get; set; }
         [Unicode(false)]
         public string Description { get; set; }
-        [StringLength(10)]
+        [StringLength(100)]
         [Unicode(false)]
         public string type { get; set; }
         public int? type_id { get; set; }

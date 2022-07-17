@@ -52,7 +52,7 @@ namespace FreelancingTeamsAPI.Controllers
         }
 
         [HttpGet("account/{Id}")]
-        public async Task<ActionResult<IEnumerable<AccountMessage>>> GetAccountNotifications(int Id)
+        public async Task<ActionResult<IEnumerable<Notification>>> GetAccountNotifications(int Id)
         {
             var Notifications = await _notification.GetAllAccNot(Id);
             if (Notifications == null)
@@ -63,7 +63,7 @@ namespace FreelancingTeamsAPI.Controllers
         }
 
         [HttpGet("team/{Id}")]
-        public async Task<ActionResult<IEnumerable<AccountMessage>>> GetTeamNotifications(int Id)
+        public async Task<ActionResult<IEnumerable<Notification>>> GetTeamNotifications(int Id)
         {
             var Notifications = await _notification.GetAllTeamNot(Id);
             if (Notifications == null)
@@ -93,6 +93,17 @@ namespace FreelancingTeamsAPI.Controllers
                 return NotFound();
             }
             return Ok(new { count = Notifications.Where(a => a.Read == false).Count() });
+        }
+
+        [HttpPut("account/{AccountId}")]
+        public async Task<ActionResult<IEnumerable<Notification>>> SetNotRead(int AccountId)
+        {
+            var notifications = await _notification.ReadAccNot(AccountId);
+            if (notifications == null)
+            {
+                return NotFound();
+            }
+            return Ok(notifications);
         }
 
     }

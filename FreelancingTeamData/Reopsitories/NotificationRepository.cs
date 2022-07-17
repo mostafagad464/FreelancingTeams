@@ -51,7 +51,11 @@ namespace FreelancingTeamData.Reopsitories
                     return null;
                 }
                 var team = await _team.GetById(TeamId);
-                notification.Teams.Add(team);
+                foreach (var teamMember in team.TeamMembers)
+                {
+                    var account = await _account.GetById(teamMember.FreelancerId);
+                    notification.Accounts.Add(account);
+                }
                 db.Notifications.AddAsync(notification);
                 await db.SaveChangesAsync();
                 return notification;
@@ -83,6 +87,29 @@ namespace FreelancingTeamData.Reopsitories
             var teamNotifications = await db.Notifications.Where(m => m.Teams.Count > 0 && m.Teams.First().Id == TeamId).ToListAsync();
 
             return teamNotifications;
+        }
+
+        public async Task<IEnumerable<Notification>> ReadAccNot(int AccountId)
+        {
+            if (db.Notifications == null)
+            {
+                return null;
+            }
+            var accountNotifications = await db.Notifications.Where(m => m.Accounts.Count > 0 && m.Accounts.First().Id == AccountId).ToListAsync();
+
+            foreach (var accountNotification in accountNotifications)
+            {
+                accountNotification.Read = true;
+            }
+            try
+            {
+                db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return accountNotifications;
         }
 
     }

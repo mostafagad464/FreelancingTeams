@@ -12,6 +12,7 @@ namespace FreelancingTeamData.Interfaces
         public Task<T> AddTeamNotification(int TeamId, T notification);
         public Task<IEnumerable<T>> GetAllAccNot(int AccountId);
         public Task<IEnumerable<T>> GetAllTeamNot(int TeamId);
+        public Task<IEnumerable<T>> ReadAccNot(int AccountId);
 
     }
     
