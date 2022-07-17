@@ -12,6 +12,7 @@ namespace FreelancingTeamData.Interfaces
         public Task<T> UpdateDeal(T _object);
         public Task<T> ProjectCompleted(int clientId, int TeamId, int projectId);
         public Task<T> GetDeal(int clientId, int TeamId, int projectId);
+        public Task<IEnumerable<T>> GetAllDeals();
         public Task<T> DeleteDeal(int clientId, int TeamId, int projectId);
         public bool DealExists(int clientId, int TeamId, int projectId);
     }

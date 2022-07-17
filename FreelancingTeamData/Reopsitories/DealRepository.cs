@@ -1,18 +1,17 @@
-﻿using FreelancingTeamData.Data;
-using FreelancingTeamData.Interfaces;
-using FreelancingTeamData.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FreelancingTeamData.Interfaces;
+using FreelancingTeamData.Models;
+using FreelancingTeamData.Data;
+using Microsoft.EntityFrameworkCore;
 using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 namespace FreelancingTeamData.Reopsitories
 {
-    public class DealRepository:IDeal<Deal>
+    public class DealRepository : IDeal<Deal>
     {
         FreeLanceProjectContext db = new FreeLanceProjectContext();
 
@@ -21,9 +20,9 @@ namespace FreelancingTeamData.Reopsitories
             db = _db;
         }
 
-        public async Task<Deal> DeleteDeal(int clientId , int TeamId , int projectId)
+        public async Task<Deal> DeleteDeal(int clientId, int TeamId, int projectId)
         {
-            var deal = await db.Deals.FindAsync(clientId , TeamId , projectId);
+            var deal = await db.Deals.FindAsync(clientId, TeamId, projectId);
             if (deal == null)
             {
                 return deal;
@@ -60,7 +59,23 @@ namespace FreelancingTeamData.Reopsitories
             var deal = await db.Deals.FindAsync(clientId, TeamId, projectId);
             return deal;
         }
-        
+        public async Task<IEnumerable<Deal>> GetAllDeals()
+        {
+            try
+            {
+                if (db.Deals == null)
+                {
+                    return null;
+                }
+                return await db.Deals.ToListAsync();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
         public async Task<Deal> UpdateDeal(Deal d)
         {
             db.Entry(d).State = EntityState.Modified;

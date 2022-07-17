@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using FreelancingTeamData.Data;
 using FreelancingTeamData.Models;
 using FreelancingTeamData.Interfaces;
 
@@ -20,6 +19,15 @@ namespace FreelancingTeamsAPI.Controllers
         public DealController(IDeal<Deal> _deal)
         {
             deal = _deal;
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> getAlltDeal()
+        {
+            var returned = await deal.GetAllDeals();
+            return Ok(returned);
+
         }
         // DELETE: api/Deals/5
         [HttpDelete("{clientId}/{teamId}/{projectId}")]
@@ -97,6 +105,7 @@ namespace FreelancingTeamsAPI.Controllers
 
             return NoContent();
         }
+        
 
         [HttpPut("{clientId}/{teamId}/{projectId}")]
         public async Task<IActionResult> putDeal(int clientId, int teamId, int projectId , Deal d)
